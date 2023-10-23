@@ -19,6 +19,8 @@ namespace Entities.ApplicationDbCon
 
 		public virtual DbSet<Cage> Cages { get; set; }
 
+		public virtual DbSet<User> Users { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			if(!optionsBuilder.IsConfigured)
@@ -30,6 +32,9 @@ namespace Entities.ApplicationDbCon
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<User>();
+
 			modelBuilder.Entity<Area>().ToTable(nameof(Area));
 			modelBuilder.Entity<Cage>().ToTable(nameof(Cage));
 
