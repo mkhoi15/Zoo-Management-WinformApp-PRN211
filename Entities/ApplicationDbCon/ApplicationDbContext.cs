@@ -21,6 +21,8 @@ namespace Entities.ApplicationDbCon
 
 		public virtual DbSet<User> Users { get; set; }
 
+		public virtual DbSet<Animal> Animals { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			if(!optionsBuilder.IsConfigured)
@@ -41,6 +43,12 @@ namespace Entities.ApplicationDbCon
 			modelBuilder.Entity<Cage>().HasOne(c => c.Area)
 				.WithMany(c => c.Cages)
 				.HasForeignKey(c => c.AreaId);
+
+			modelBuilder.Entity<Animal>().ToTable(nameof(Animal));
+
+			modelBuilder.Entity<Animal>().HasOne(a => a.Cage)
+				.WithMany(c => c.Animals)
+				.HasForeignKey(a => a.CageId);
 		}
 
 		private string GetConnectionString()
@@ -49,7 +57,7 @@ namespace Entities.ApplicationDbCon
 				.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile("appsettings.json", true, true)
 				.Build();
-			var strCon = configuration["ConnectionStrings:Default"];
+			var strCon = configuration["ConnectionStrings:Default"] ?? string.Empty;
 			return strCon;
 		}
 	}

@@ -1,15 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Entities.Models.EntitiesBase;
 
 namespace Entities.Models
 {
-	public class Cage
+	public class Cage : IEntity
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
 		[NotNull]
 		[StringLength(50)]
 		public string CageName { get; set; } = string.Empty;
@@ -18,5 +14,6 @@ namespace Entities.Models
 		public int AreaId { get; set; }
 
 		public virtual Area? Area { get; set; }
+		public virtual ICollection<Animal> Animals { get; set; } = new List<Animal>();
 	}
 }

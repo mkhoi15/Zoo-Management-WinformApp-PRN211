@@ -1,15 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Entities.Models.EntitiesBase;
 
 namespace Entities.Models
 {
-	public class User
+	public class User : IEntity
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
 		[StringLength(20)]
 		[NotNull]
 		public string? UserName { get; set; }
@@ -26,6 +23,10 @@ namespace Entities.Models
 		[StringLength(50)]
 		[NotNull]
 		public string? Email { get; set; }
+
+		[StringLength(10)]
+		[NotNull]
+		public string? Gender { get; set; }
 
 		[Phone]
 		[NotNull]
