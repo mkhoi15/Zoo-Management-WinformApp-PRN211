@@ -23,7 +23,9 @@ namespace Zoo.Management.WinformApp
 
 			var user = await _userRepository.GetAll()
 				.Where(u => u.UserName == userName && u.Password == password)
+				.AsNoTracking()
 				.FirstOrDefaultAsync();
+
 			if (user == null)
 			{
 				MessageBox.Show("The user name or password is not correct!!");
