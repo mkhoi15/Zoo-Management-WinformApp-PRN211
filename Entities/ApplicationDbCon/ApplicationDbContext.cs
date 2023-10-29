@@ -35,7 +35,30 @@ namespace Entities.ApplicationDbCon
 		{
 			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.Entity<User>();
+			modelBuilder.Entity<User>().ToTable(nameof(User));
+			modelBuilder.Entity<User>().HasData(new User()
+			{
+				Id = 1,
+				FullName = "Admin",
+				UserName = "admin",
+				Email = "saigonzoo@gmail.com",
+				Dob = DateTime.Now,
+				Gender = "Male",
+				Password = "12345",
+				PhoneNumber = "1234567890",
+				Role = "Admin"
+			}, new User()
+			{
+				Id = 2,
+				FullName = "Staff",
+				UserName = "staff1",
+				Email = "saigonzoo@gmail.com",
+				Dob = DateTime.Now,
+				Gender = "Male",
+				Password = "12345",
+				PhoneNumber = "1234567890",
+				Role = "Staff"
+			});
 
 			modelBuilder.Entity<Area>().ToTable(nameof(Area));
 			modelBuilder.Entity<Cage>().ToTable(nameof(Cage));

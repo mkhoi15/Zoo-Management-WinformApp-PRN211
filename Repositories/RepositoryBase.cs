@@ -20,7 +20,7 @@ namespace Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public IQueryable<T> GetAllAsync()
+		public IQueryable<T> GetAll()
 		{
 			return _dbSet.AsQueryable();
 		}
