@@ -7,14 +7,14 @@ namespace Entities.Helper
 	{
 		public ApplicationUserValidationHelper() 
 		{
-			RuleFor(u => u.FullName).NotNull().NotEmpty();
-			RuleFor(u => u.Password).NotNull().NotEmpty();
-			RuleFor(u => u.UserName).NotNull().NotEmpty();
-			RuleFor(u => u.Email).NotNull().NotEmpty().EmailAddress();
-			RuleFor(u => u.PhoneNumber).NotNull().NotEmpty();
-			RuleFor(u => u.Dob).NotNull().NotEmpty();
-			RuleFor(u => u.Gender).NotNull().NotEmpty();
-			RuleFor(u => u.Role).NotNull().NotEmpty();
+			RuleFor(u => u.FullName).NotNull().NotEmpty().WithMessage("Full name can not be empty");
+			RuleFor(u => u.Password).NotNull().NotEmpty().WithMessage("Password can not be empty");
+			RuleFor(u => u.UserName).NotNull().NotEmpty().WithMessage("User name can not be empty");
+			RuleFor(u => u.Email).NotNull().NotEmpty().EmailAddress().WithMessage("Email can not be empty");
+			RuleFor(u => u.PhoneNumber).NotNull().NotEmpty().WithMessage("phone number can not be empty");
+			RuleFor(u => u.Dob).NotNull().NotEmpty().WithMessage("Date of birth can not be empty");
+			RuleFor(u => u.Gender).NotNull().NotEmpty().WithMessage("Gender can not be empty");
+			RuleFor(u => u.Role).NotNull().NotEmpty().WithMessage("Role can not be empty");
 		}
 	}
 }

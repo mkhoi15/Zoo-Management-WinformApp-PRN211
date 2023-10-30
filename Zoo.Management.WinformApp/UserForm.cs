@@ -8,17 +8,22 @@ namespace Zoo.Management.WinformApp
     public partial class UserForm : Form
     {
         private readonly UserRepository _resipotory;
+        private readonly ApplicationUser _user;
         private List<ApplicationUser> _applicationUsers = new List<ApplicationUser>();
-        public UserForm()
+        public UserForm(ApplicationUser applicationUser)
         {
             _resipotory = new UserRepository();
+            _user = applicationUser;
+
             InitializeComponent();
             this.ShowListUser();
         }
 
         private void ShowListUser()
         {
-            _applicationUsers = _resipotory.GetAll().AsNoTracking().ToList();
+            _applicationUsers = _resipotory.GetAll()
+                .Where(u => u.IsDeleted == false)
+				.AsNoTracking().ToList();
             dgvUser.DataSource = _applicationUsers.Select(u => new
             {
                 Id = u.Id.ToString(),

@@ -7,7 +7,7 @@ namespace Entities.Helper
 	{
 		public AreaValidationHelper() 
 		{
-			RuleFor(u => u.Name).NotNull().NotEmpty();
+			RuleFor(u => u.Name).NotNull().NotEmpty().WithMessage("Area name can not be empty!");
 		}
 	}
 }
