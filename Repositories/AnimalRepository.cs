@@ -6,7 +6,7 @@ namespace Repositories
     {
 		public async Task<bool> DeleteUserAsync(Animal animal)
 		{
-			var animalDelete = await this.GetByIdAsync(animal);
+			var animalDelete = await this.GetByIdAsync(animal.Id);
 			if (animalDelete == null)
 			{
 				return false;

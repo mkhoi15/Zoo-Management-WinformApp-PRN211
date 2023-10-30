@@ -6,7 +6,7 @@ namespace Repositories
     {
 		public async Task<bool> DeleteCageAsync(Cage cage)
 		{
-			var cageDelete = await this.GetByIdAsync(cage);
+			var cageDelete = await this.GetByIdAsync(cage.Id);
 			if (cageDelete == null)
 			{
 				return false;
