@@ -30,9 +30,9 @@ namespace Repositories
 			tracker.State = EntityState.Modified;
 			await _context.SaveChangesAsync();
 		}
-		public async Task<T?> GetByIdAsync(T entity)
+		public async Task<T?> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(entity);
+            return await _dbSet.FindAsync(id);
         }
 
     }
