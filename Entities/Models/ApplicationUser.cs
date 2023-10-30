@@ -5,7 +5,7 @@ using Entities.Models.EntitiesBase;
 
 namespace Entities.Models
 {
-	public class User : IEntity
+	public class ApplicationUser : IEntity
 	{
 		[StringLength(20)]
 		[NotNull]
