@@ -169,9 +169,15 @@ namespace Zoo.Management.WinformApp
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             var user = GetCurrentUser();
-            await _resipotory.DeleteUserAsync(user);
+            var isDeleted = await _resipotory.DeleteUserAsync(user);
+            if (isDeleted)
+            {
+                MessageBox.Show("Deleted");
+            } else
+            {
+                MessageBox.Show("Delete failed!");
+            }
             EmptyBoxes();
-            MessageBox.Show("Deleted");
             btnCreate.Enabled = true;
             btnDelete.Enabled = false;
             ShowListUser();
@@ -239,11 +245,20 @@ namespace Zoo.Management.WinformApp
         private async void btnRecovery_Click(object sender, EventArgs e)
         {
             var user = GetCurrentUser();
-            await _resipotory.RecoveryUserAsync(user);
+            var isRecovered = await _resipotory.RecoveryUserAsync(user);
             EmptyBoxes();
-            MessageBox.Show("Deleted");
+            if (isRecovered)
+            {
+                MessageBox.Show("Recovered");
+            } else
+            {
+                MessageBox.Show("Recover failed!");
+            }
             btnCreate.Enabled = true;
             btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            btnDeletedList.Enabled=true;
+            btnCurrentList.Enabled=false;
             ShowListUser();
         }
     }

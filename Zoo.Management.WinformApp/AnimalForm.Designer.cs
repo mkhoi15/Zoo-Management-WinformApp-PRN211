@@ -43,115 +43,131 @@
 			btnCreate = new Button();
 			btnUpdate = new Button();
 			btnDelete = new Button();
+			txtSearch = new TextBox();
+			btnSearch = new Button();
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Location = new Point(545, 46);
+			label1.Location = new Point(681, 58);
+			label1.Margin = new Padding(4, 0, 4, 0);
 			label1.Name = "label1";
-			label1.Size = new Size(127, 20);
+			label1.Size = new Size(151, 25);
 			label1.TabIndex = 0;
 			label1.Text = "Welcome To ZMA";
 			// 
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Location = new Point(36, 129);
+			label2.Location = new Point(45, 161);
+			label2.Margin = new Padding(4, 0, 4, 0);
 			label2.Name = "label2";
-			label2.Size = new Size(24, 20);
+			label2.Size = new Size(30, 25);
 			label2.TabIndex = 1;
 			label2.Text = "ID";
 			// 
 			// label3
 			// 
 			label3.AutoSize = true;
-			label3.Location = new Point(36, 187);
+			label3.Location = new Point(45, 234);
+			label3.Margin = new Padding(4, 0, 4, 0);
 			label3.Name = "label3";
-			label3.Size = new Size(100, 20);
+			label3.Size = new Size(119, 25);
 			label3.TabIndex = 2;
 			label3.Text = "Animal Name";
 			// 
 			// label4
 			// 
 			label4.AutoSize = true;
-			label4.Location = new Point(36, 251);
+			label4.Location = new Point(45, 314);
+			label4.Margin = new Padding(4, 0, 4, 0);
 			label4.Name = "label4";
-			label4.Size = new Size(59, 20);
+			label4.Size = new Size(71, 25);
 			label4.TabIndex = 3;
 			label4.Text = "Species";
 			// 
 			// label5
 			// 
 			label5.AutoSize = true;
-			label5.Location = new Point(36, 333);
+			label5.Location = new Point(45, 416);
+			label5.Margin = new Padding(4, 0, 4, 0);
 			label5.Name = "label5";
-			label5.Size = new Size(36, 20);
+			label5.Size = new Size(44, 25);
 			label5.TabIndex = 4;
 			label5.Text = "Age";
 			// 
 			// label6
 			// 
 			label6.AutoSize = true;
-			label6.Location = new Point(36, 417);
+			label6.Location = new Point(45, 521);
+			label6.Margin = new Padding(4, 0, 4, 0);
 			label6.Name = "label6";
-			label6.Size = new Size(43, 20);
+			label6.Size = new Size(52, 25);
 			label6.TabIndex = 5;
 			label6.Text = "Cage";
 			// 
 			// cbCage
 			// 
 			cbCage.FormattingEnabled = true;
-			cbCage.Location = new Point(156, 417);
+			cbCage.Location = new Point(195, 521);
+			cbCage.Margin = new Padding(4);
 			cbCage.Name = "cbCage";
-			cbCage.Size = new Size(236, 28);
+			cbCage.Size = new Size(294, 33);
 			cbCage.TabIndex = 6;
 			// 
 			// dgvAnimal
 			// 
 			dgvAnimal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvAnimal.Location = new Point(427, 106);
+			dgvAnimal.Location = new Point(534, 132);
+			dgvAnimal.Margin = new Padding(4);
 			dgvAnimal.Name = "dgvAnimal";
 			dgvAnimal.RowHeadersWidth = 51;
 			dgvAnimal.RowTemplate.Height = 29;
-			dgvAnimal.Size = new Size(868, 521);
+			dgvAnimal.Size = new Size(1085, 651);
 			dgvAnimal.TabIndex = 7;
+			dgvAnimal.CellDoubleClick += dgvAnimal_CellDoubleClick;
 			// 
 			// txtID
 			// 
-			txtID.Location = new Point(156, 124);
+			txtID.Location = new Point(195, 155);
+			txtID.Margin = new Padding(4);
 			txtID.Name = "txtID";
 			txtID.ReadOnly = true;
-			txtID.Size = new Size(236, 27);
+			txtID.Size = new Size(294, 31);
 			txtID.TabIndex = 8;
 			// 
 			// txtAnimalName
 			// 
-			txtAnimalName.Location = new Point(156, 187);
+			txtAnimalName.Location = new Point(195, 234);
+			txtAnimalName.Margin = new Padding(4);
 			txtAnimalName.Name = "txtAnimalName";
-			txtAnimalName.Size = new Size(231, 27);
+			txtAnimalName.Size = new Size(294, 31);
 			txtAnimalName.TabIndex = 9;
 			// 
 			// txtSpecies
 			// 
-			txtSpecies.Location = new Point(156, 251);
+			txtSpecies.Location = new Point(195, 314);
+			txtSpecies.Margin = new Padding(4);
 			txtSpecies.Name = "txtSpecies";
-			txtSpecies.Size = new Size(236, 27);
+			txtSpecies.Size = new Size(294, 31);
 			txtSpecies.TabIndex = 10;
 			// 
 			// txtAge
 			// 
-			txtAge.Location = new Point(156, 333);
+			txtAge.Location = new Point(195, 416);
+			txtAge.Margin = new Padding(4);
 			txtAge.Name = "txtAge";
-			txtAge.Size = new Size(236, 27);
+			txtAge.Size = new Size(294, 31);
 			txtAge.TabIndex = 11;
 			// 
 			// btnCreate
 			// 
-			btnCreate.Location = new Point(36, 515);
+			btnCreate.Location = new Point(45, 644);
+			btnCreate.Margin = new Padding(4);
 			btnCreate.Name = "btnCreate";
-			btnCreate.Size = new Size(94, 29);
+			btnCreate.Size = new Size(118, 36);
 			btnCreate.TabIndex = 12;
 			btnCreate.Text = "Create";
 			btnCreate.UseVisualStyleBackColor = true;
@@ -159,9 +175,10 @@
 			// 
 			// btnUpdate
 			// 
-			btnUpdate.Location = new Point(184, 515);
+			btnUpdate.Location = new Point(230, 644);
+			btnUpdate.Margin = new Padding(4);
 			btnUpdate.Name = "btnUpdate";
-			btnUpdate.Size = new Size(94, 29);
+			btnUpdate.Size = new Size(118, 36);
 			btnUpdate.TabIndex = 13;
 			btnUpdate.Text = "Update";
 			btnUpdate.UseVisualStyleBackColor = true;
@@ -169,19 +186,39 @@
 			// 
 			// btnDelete
 			// 
-			btnDelete.Location = new Point(327, 515);
+			btnDelete.Location = new Point(409, 644);
+			btnDelete.Margin = new Padding(4);
 			btnDelete.Name = "btnDelete";
-			btnDelete.Size = new Size(94, 29);
+			btnDelete.Size = new Size(118, 36);
 			btnDelete.TabIndex = 14;
 			btnDelete.Text = "Delete";
 			btnDelete.UseVisualStyleBackColor = true;
 			btnDelete.Click += btnDelete_Click;
 			// 
+			// txtSearch
+			// 
+			txtSearch.Location = new Point(1036, 58);
+			txtSearch.Name = "txtSearch";
+			txtSearch.Size = new Size(294, 31);
+			txtSearch.TabIndex = 15;
+			// 
+			// btnSearch
+			// 
+			btnSearch.Location = new Point(1408, 55);
+			btnSearch.Name = "btnSearch";
+			btnSearch.Size = new Size(112, 34);
+			btnSearch.TabIndex = 16;
+			btnSearch.Text = "Search";
+			btnSearch.UseVisualStyleBackColor = true;
+			btnSearch.Click += btnSearch_Click;
+			// 
 			// AnimalForm
 			// 
-			AutoScaleDimensions = new SizeF(8F, 20F);
+			AutoScaleDimensions = new SizeF(10F, 25F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(1525, 697);
+			ClientSize = new Size(1906, 871);
+			Controls.Add(btnSearch);
+			Controls.Add(txtSearch);
 			Controls.Add(btnDelete);
 			Controls.Add(btnUpdate);
 			Controls.Add(btnCreate);
@@ -197,6 +234,7 @@
 			Controls.Add(label3);
 			Controls.Add(label2);
 			Controls.Add(label1);
+			Margin = new Padding(4);
 			Name = "AnimalForm";
 			Text = "AnimalForm";
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).EndInit();
@@ -221,5 +259,7 @@
 		private Button btnCreate;
 		private Button btnUpdate;
 		private Button btnDelete;
+		private TextBox txtSearch;
+		private Button btnSearch;
 	}
 }
