@@ -10,8 +10,8 @@ namespace Entities.Helper
 			RuleFor(u => u.FullName).NotNull().NotEmpty().WithMessage("Full name can not be empty");
 			RuleFor(u => u.Password).NotNull().NotEmpty().WithMessage("Password can not be empty");
 			RuleFor(u => u.UserName).NotNull().NotEmpty().WithMessage("User name can not be empty");
-			RuleFor(u => u.Email).NotNull().NotEmpty().EmailAddress().WithMessage("Email can not be empty");
-			RuleFor(u => u.PhoneNumber).NotNull().NotEmpty().WithMessage("phone number can not be empty");
+			RuleFor(u => u.Email).EmailAddress();
+			RuleFor(u => u.PhoneNumber).Length(min: 10, max: 11).WithMessage("Phone number must have lenght 10 - 11 number");
 			RuleFor(u => u.Dob).NotNull().NotEmpty().WithMessage("Date of birth can not be empty");
 			RuleFor(u => u.Gender).NotNull().NotEmpty().WithMessage("Gender can not be empty");
 			RuleFor(u => u.Role).NotNull().NotEmpty().WithMessage("Role can not be empty");
