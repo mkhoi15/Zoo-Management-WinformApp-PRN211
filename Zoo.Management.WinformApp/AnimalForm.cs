@@ -17,6 +17,7 @@ namespace Zoo.Management.WinformApp
 	{
 		private readonly AnimalRepository _animalRepository;
 		private readonly CageRepository _cageRepository;
+		private List<Animal> _animals = new List<Animal>(); 
 		public AnimalForm()
 		{
 			_animalRepository = new AnimalRepository();
@@ -168,7 +169,72 @@ namespace Zoo.Management.WinformApp
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
+			btnCreate.Enabled = true;
+			btnUpdate.Enabled = false;
+			btnDelete.Enabled = false;
 
+			var IsValidId = int.TryParse(txtID.Text, out int id);
+			if (IsValidId == false)
+			{
+				MessageBox.Show("ID is not valid");
+				btnDelete.Enabled = true;
+				return;
+			}
+
+			var animal = _animalRepository.GetAll().Where(a => a.Id == id).FirstOrDefault();
+			if (animal == null)
+			{
+				MessageBox.Show("Animal is not exist");
+				btnDelete.Enabled = true;
+				return;
+			}
+
+			_animalRepository.DeleteAsync(animal).Wait();
+
+			this.ShowListOfAnimal();
+
+			this.ClearTextBox();
+
+		}
+
+		private void dgvAnimal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			btnCreate.Enabled = false;
+			btnUpdate.Enabled = true;
+			btnDelete.Enabled = true;
+
+			var data = dgvAnimal.Rows[e.RowIndex].Cells;
+
+			txtID.Text = data[0].Value.ToString();
+			txtAnimalName.Text = data[1].Value.ToString();
+			txtSpecies.Text = data[2].Value.ToString();
+			txtAge.Text = data[3].Value.ToString();
+			cbCage.SelectedItem = data[4].Value.ToString();
+		}
+
+		private void Search(string searchString)
+		{
+			var listAnimal = _animalRepository.GetAll().AsNoTracking()
+								.Where(a => a.IsDelete == false && a.AnimalName.Contains(searchString))
+								.Include(p => p.Cage)
+								.Select(a => new
+								{
+									Name = a.AnimalName,
+									Species = a.Species,
+									Age = a.Age,
+									Cage = a.Cage.CageName
+								}).ToList();
+			var animal = _cageRepository.GetAll().Include(a => a.CageName).ToList();
+
+			if (animal != null)
+			{
+				dgvAnimal.DataSource = animal;
+			}
+		}
+		private void btnSearch_Click(object sender, EventArgs e)
+		{
+			var searchString = txtSearch.Text;
+			Search(searchString);
 		}
 	}
 }
