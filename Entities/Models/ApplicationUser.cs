@@ -38,6 +38,8 @@ namespace Entities.Models
 		[Column(TypeName = "Date")]
 		public DateTime Dob { get; set; }
 
+		public bool IsDeleted { get; set; } = false;
+
 		[StringLength(10)]
 		[NotNull]
 		public string? Role { get; set; }

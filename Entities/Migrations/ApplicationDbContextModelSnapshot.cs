@@ -39,6 +39,9 @@ namespace Entities.Migrations
                     b.Property<int>("CageId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Species")
                         .HasColumnType("nvarchar(max)");
 
@@ -75,6 +78,9 @@ namespace Entities.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -103,10 +109,11 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            Dob = new DateTime(2023, 10, 30, 13, 53, 36, 267, DateTimeKind.Local).AddTicks(5863),
+                            Dob = new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3744),
                             Email = "saigonzoo@gmail.com",
                             FullName = "Admin",
                             Gender = "Male",
+                            IsDeleted = false,
                             Password = "12345",
                             PhoneNumber = "1234567890",
                             Role = "Admin",
@@ -115,10 +122,11 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 2,
-                            Dob = new DateTime(2023, 10, 30, 13, 53, 36, 267, DateTimeKind.Local).AddTicks(5874),
+                            Dob = new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3756),
                             Email = "saigonzoo@gmail.com",
                             FullName = "Staff",
                             Gender = "Male",
+                            IsDeleted = false,
                             Password = "12345",
                             PhoneNumber = "1234567890",
                             Role = "Staff",
@@ -133,6 +141,9 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -159,6 +170,9 @@ namespace Entities.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

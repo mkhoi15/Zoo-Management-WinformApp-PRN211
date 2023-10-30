@@ -13,6 +13,8 @@ namespace Entities.Models
 		[NotNull]
 		public int AreaId { get; set; }
 
+		public bool IsDeleted { get; set; } = false;
+
 		public virtual Area? Area { get; set; }
 		public virtual ICollection<Animal> Animals { get; set; } = new List<Animal>();
 	}
