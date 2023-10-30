@@ -36,7 +36,7 @@
 			textBox1 = new TextBox();
 			textBox2 = new TextBox();
 			textBox3 = new TextBox();
-			comboBox1 = new ComboBox();
+			cbCage = new ComboBox();
 			label1 = new Label();
 			btnCreate = new Button();
 			btnUpdate = new Button();
@@ -111,13 +111,13 @@
 			textBox3.Size = new Size(125, 27);
 			textBox3.TabIndex = 7;
 			// 
-			// comboBox1
+			// cbCage
 			// 
-			comboBox1.FormattingEnabled = true;
-			comboBox1.Location = new Point(150, 335);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(151, 28);
-			comboBox1.TabIndex = 8;
+			cbCage.FormattingEnabled = true;
+			cbCage.Location = new Point(150, 335);
+			cbCage.Name = "cbCage";
+			cbCage.Size = new Size(151, 28);
+			cbCage.TabIndex = 8;
 			// 
 			// label1
 			// 
@@ -168,7 +168,7 @@
 			Controls.Add(btnUpdate);
 			Controls.Add(btnCreate);
 			Controls.Add(label1);
-			Controls.Add(comboBox1);
+			Controls.Add(cbCage);
 			Controls.Add(textBox3);
 			Controls.Add(textBox2);
 			Controls.Add(textBox1);
@@ -194,7 +194,7 @@
 		private TextBox textBox1;
 		private TextBox textBox2;
 		private TextBox textBox3;
-		private ComboBox comboBox1;
+		private ComboBox cbCage;
 		private Label label1;
 		private Button btnCreate;
 		private Button btnUpdate;
