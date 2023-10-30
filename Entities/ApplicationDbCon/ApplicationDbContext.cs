@@ -19,7 +19,7 @@ namespace Entities.ApplicationDbCon
 
 		public virtual DbSet<Cage> Cages { get; set; }
 
-		public virtual DbSet<User> Users { get; set; }
+		public virtual DbSet<ApplicationUser> Users { get; set; }
 
 		public virtual DbSet<Animal> Animals { get; set; }
 
@@ -35,8 +35,8 @@ namespace Entities.ApplicationDbCon
 		{
 			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.Entity<User>().ToTable(nameof(User));
-			modelBuilder.Entity<User>().HasData(new User()
+			modelBuilder.Entity<ApplicationUser>().ToTable(nameof(ApplicationUser));
+			modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser()
 			{
 				Id = 1,
 				FullName = "Admin",
@@ -47,7 +47,7 @@ namespace Entities.ApplicationDbCon
 				Password = "12345",
 				PhoneNumber = "1234567890",
 				Role = "Admin"
-			}, new User()
+			}, new ApplicationUser()
 			{
 				Id = 2,
 				FullName = "Staff",
