@@ -23,7 +23,7 @@ namespace Zoo.Management.WinformApp
         {
             _applicationUsers = _resipotory.GetAll()
                 .Where(u => u.IsDeleted == false)
-				.AsNoTracking().ToList();
+                .AsNoTracking().ToList();
             dgvUser.DataSource = _applicationUsers.Select(u => new
             {
                 Id = u.Id.ToString(),
@@ -33,7 +33,24 @@ namespace Zoo.Management.WinformApp
                 phoneNumber = u.PhoneNumber,
                 gender = u.Gender,
                 role = u.Role,
-                dob = u.Dob,
+                DateOfBirth = u.Dob,
+            }).ToList();
+        }
+        private void Search(string searchString)
+        {
+            _applicationUsers = _resipotory.GetAll()
+                .Where(u => u.IsDeleted == false && u.FullName.Contains(searchString))
+                .AsNoTracking().ToList();
+            dgvUser.DataSource = _applicationUsers.Select(u => new
+            {
+                Id = u.Id.ToString(),
+                userName = u.UserName,
+                fullName = u.FullName,
+                email = u.Email,
+                phoneNumber = u.PhoneNumber,
+                gender = u.Gender,
+                role = u.Role,
+                DateOfBirth = u.Dob,
             }).ToList();
         }
         private void EmptyBoxes()
@@ -76,24 +93,6 @@ namespace Zoo.Management.WinformApp
             ShowListUser();
         }
 
-        private void dgvUser_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-            btnCreate.Enabled = false;
-            var data = _applicationUsers[e.RowIndex];
-            txtId.Text = data.Id.ToString();
-            txtUserName.Text = data.UserName;
-            txtPassword.Text = data.Password;
-            txtFullName.Text = data.FullName;
-            txtEmail.Text = data.Email;
-            txtPhoneNumber.Text = data.PhoneNumber;
-            cbGender.Text = data.Gender.ToString();
-            cbRole.Text = data.Role.ToString();
-            dtpDateOfBirth.Text = data.Dob.ToString();
-
-        }
-
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
             var userName = txtUserName.Text;
@@ -118,6 +117,7 @@ namespace Zoo.Management.WinformApp
                 Gender = gender,
                 Role = role,
                 Dob = dob,
+                IsDeleted = false
             };
             await _resipotory.UpdateAsync(newUser);
             EmptyBoxes();
@@ -130,7 +130,30 @@ namespace Zoo.Management.WinformApp
 
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var searchString = txtSearch.Text;
+            Search(searchString);
+        }
 
+        private void dgvUser_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            btnCreate.Enabled = false;
+
+            var data = _applicationUsers[e.RowIndex];
+
+            txtId.Text = data.Id.ToString();
+            txtUserName.Text = data.UserName;
+            txtPassword.Text = data.Password;
+            txtFullName.Text = data.FullName;
+            txtEmail.Text = data.Email;
+            txtPhoneNumber.Text = data.PhoneNumber;
+            cbGender.Text = data.Gender.ToString();
+            cbRole.Text = data.Role.ToString();
+            dtpDateOfBirth.Text = data.Dob.ToString();
+        }
     }
 
 }
