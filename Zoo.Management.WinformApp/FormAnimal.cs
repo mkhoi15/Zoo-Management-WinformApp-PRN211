@@ -1,22 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
+
 
 namespace Zoo.Management.WinformApp
 {
-	public partial class Animal : Form
+	public partial class FormAnimal : Form
 	{
 		private readonly AnimalRepository _animalRepository;
 		private readonly CageRepository _cageRepository;
-		public Animal()
+		public FormAnimal()
 		{
 			_animalRepository = new AnimalRepository();
 			_cageRepository = new CageRepository();
@@ -42,6 +37,7 @@ namespace Zoo.Management.WinformApp
 								{
 									Id = a.Id,
 									Name = a.AnimalName,
+									Species = a.Species,
 									Age = a.Age,
 									Cage = a.Cage.CageName
 								}).ToList();
@@ -54,11 +50,37 @@ namespace Zoo.Management.WinformApp
 
 		public void ClearTextBox()
 		{
-
+			txtId.Text = string.Empty;
+			txtName.Text = string.Empty;
+			txtAge.Text = string.Empty;
+			cbCage.SelectedItem = "";
+			txtSpecies.Text = string.Empty;
 		}
 
 		private void btnCreate_Click(object sender, EventArgs e)
 		{
+			btnCreate.Enabled = false;
+			var animalName = txtName.Text;
+			var animalAge = txtAge.Text;	
+			var animalSpecies = txtSpecies.Text;
+
+			if(cbCage.SelectedItem == null)
+			{
+				MessageBox.Show("Please select the cage for Animal");
+				btnCreate.Enabled = true;
+				return;
+			}
+
+			var cage = cbCage.SelectedItem as Cage;
+
+			Animal animal = new Animal()
+			{
+				AnimalName = animalName,
+				Species= animalSpecies,
+				Age= animalAge,
+				Cage = cage
+				
+			};
 
 		}
 

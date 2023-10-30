@@ -1,6 +1,6 @@
 ﻿namespace Zoo.Management.WinformApp
 {
-	partial class Animal
+	partial class FormAnimal
 	{
 		/// <summary>
 		/// Required designer variable.
