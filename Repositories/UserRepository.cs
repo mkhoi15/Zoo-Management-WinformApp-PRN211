@@ -19,7 +19,7 @@ namespace Repositories
 		}
         public async Task<bool> RecoveryUserAsync(ApplicationUser user)
         {
-            var userDelete = await this.GetByIdAsync(user);
+            var userDelete = await this.GetByIdAsync(user.Id);
             if (userDelete == null)
             {
                 return false;

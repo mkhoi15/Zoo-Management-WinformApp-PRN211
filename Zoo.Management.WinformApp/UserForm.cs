@@ -2,6 +2,7 @@
 using Repositories;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Entities.Helper;
 
 namespace Zoo.Management.WinformApp
 {
@@ -117,7 +118,13 @@ namespace Zoo.Management.WinformApp
             var password = txtPassword.Text;
             var fullName = txtFullName.Text;
             var email = txtEmail.Text;
-            var phoneNumber = txtPhoneNumber.Text;
+			var isValidPhoneNumber = int.TryParse(txtPhoneNumber.Text, out int phone);
+            if (!isValidPhoneNumber)
+            {
+                MessageBox.Show("Phone number is not valid!!");
+                return;
+            }
+            var phoneNumber = phone.ToString();
 
             var gender = cbGender.Text;
             var role = cbRole.Text;
@@ -134,6 +141,17 @@ namespace Zoo.Management.WinformApp
                 Role = role,
                 Dob = dob,
             };
+
+            ApplicationUserValidationHelper validator = new();
+            var result = validator.Validate(newUser);
+
+            if (!result.IsValid)
+            {
+                var errorsMessage = result.ToString("\n");
+                MessageBox.Show(errorsMessage);
+                return;
+            }
+
             await _resipotory.AddAsync(newUser);
             ShowListUser();
         }
