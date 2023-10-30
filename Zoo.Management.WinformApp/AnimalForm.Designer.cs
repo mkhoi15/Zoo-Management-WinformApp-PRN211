@@ -45,6 +45,9 @@
 			btnDelete = new Button();
 			txtSearch = new TextBox();
 			btnSearch = new Button();
+			btnDeletedAnimal = new Button();
+			btnCurrentAnimal = new Button();
+			btnRecovery = new Button();
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
 			SuspendLayout();
 			// 
@@ -197,26 +200,63 @@
 			// 
 			// txtSearch
 			// 
-			txtSearch.Location = new Point(1036, 58);
+			txtSearch.Location = new Point(982, 805);
 			txtSearch.Name = "txtSearch";
 			txtSearch.Size = new Size(294, 31);
 			txtSearch.TabIndex = 15;
 			// 
 			// btnSearch
 			// 
-			btnSearch.Location = new Point(1408, 55);
+			btnSearch.Location = new Point(1321, 801);
 			btnSearch.Name = "btnSearch";
-			btnSearch.Size = new Size(112, 34);
+			btnSearch.Size = new Size(117, 35);
 			btnSearch.TabIndex = 16;
 			btnSearch.Text = "Search";
 			btnSearch.UseVisualStyleBackColor = true;
 			btnSearch.Click += btnSearch_Click;
+			// 
+			// btnDeletedAnimal
+			// 
+			btnDeletedAnimal.Enabled = false;
+			btnDeletedAnimal.Location = new Point(1453, 94);
+			btnDeletedAnimal.Name = "btnDeletedAnimal";
+			btnDeletedAnimal.Size = new Size(166, 41);
+			btnDeletedAnimal.TabIndex = 26;
+			btnDeletedAnimal.Text = "Deleted Animal";
+			btnDeletedAnimal.UseVisualStyleBackColor = false;
+			btnDeletedAnimal.Click += btnDeletedAnimal_Click;
+			// 
+			// btnCurrentAnimal
+			// 
+			btnCurrentAnimal.Enabled = false;
+			btnCurrentAnimal.Location = new Point(1290, 94);
+			btnCurrentAnimal.Name = "btnCurrentAnimal";
+			btnCurrentAnimal.Size = new Size(166, 41);
+			btnCurrentAnimal.TabIndex = 27;
+			btnCurrentAnimal.Text = "Current Animal";
+			btnCurrentAnimal.UseVisualStyleBackColor = false;
+			btnCurrentAnimal.Click += btnCurrentAnimal_Click;
+			// 
+			// btnRecovery
+			// 
+			btnRecovery.Enabled = false;
+			btnRecovery.Location = new Point(409, 715);
+			btnRecovery.Name = "btnRecovery";
+			btnRecovery.Size = new Size(118, 41);
+			btnRecovery.TabIndex = 28;
+			btnRecovery.Text = "Recovery";
+			btnRecovery.UseVisualStyleBackColor = true;
+			btnRecovery.Visible = false;
+			btnRecovery.Click += btnRecovery_Click;
 			// 
 			// AnimalForm
 			// 
 			AutoScaleDimensions = new SizeF(10F, 25F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(1906, 871);
+			Controls.Add(btnRecovery);
+			Controls.Add(btnCurrentAnimal);
+			Controls.Add(btnDeletedAnimal);
 			Controls.Add(btnSearch);
 			Controls.Add(txtSearch);
 			Controls.Add(btnDelete);
@@ -261,5 +301,8 @@
 		private Button btnDelete;
 		private TextBox txtSearch;
 		private Button btnSearch;
+		private Button btnDeletedAnimal;
+		private Button btnCurrentAnimal;
+		private Button btnRecovery;
 	}
 }

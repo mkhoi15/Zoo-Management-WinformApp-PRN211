@@ -18,7 +18,8 @@ namespace Zoo.Management.WinformApp
 	{
 		private readonly AnimalRepository _animalRepository;
 		private readonly CageRepository _cageRepository;
-		private List<Animal> _animals = new List<Animal>(); 
+		private readonly Animal _animal;
+		private List<Animal> _animals = new List<Animal>();
 		public AnimalForm()
 		{
 			_animalRepository = new AnimalRepository();
@@ -36,6 +37,24 @@ namespace Zoo.Management.WinformApp
 				cbCage.ValueMember = "Id";
 			}
 
+		}
+
+		private Animal GetCurrentAnimal()
+		{
+			var id = txtID.Text;
+			var animalName = txtAnimalName.Text;
+			var species = txtSpecies.Text;
+			var age = txtAge.Text;
+
+			var currentAnimal = new Animal()
+			{
+				Id = int.Parse(id),
+				AnimalName = animalName,
+				Species = species,
+				Age = int.Parse(age),
+				IsDelete = false
+			};
+			return currentAnimal;
 		}
 
 		private void ShowListOfAnimal()
@@ -242,10 +261,67 @@ namespace Zoo.Management.WinformApp
 				dgvAnimal.DataSource = animal;
 			}
 		}
+
+		private void EmptyBoxes()
+		{
+			txtID.Text = String.Empty;
+			txtAnimalName.Text = String.Empty;
+			txtSpecies.Text = String.Empty;
+			txtAge.Text = String.Empty;
+			txtSearch.Text = String.Empty;
+			cbCage.Text = String.Empty;
+		}
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
 			var searchString = txtSearch.Text;
 			Search(searchString);
+		}
+
+		private void btnCurrentAnimal_Click(object sender, EventArgs e)
+		{
+			btnDeletedAnimal.Enabled = true;
+			btnCurrentAnimal.Enabled = false;
+
+			btnCreate.Enabled = true;
+
+			btnRecovery.Enabled = false;
+			btnRecovery.Visible = false;
+			ShowListOfAnimal();
+		}
+
+		private void btnDeletedAnimal_Click(object sender, EventArgs e)
+		{
+			btnCurrentAnimal.Enabled = true;
+			btnDeletedAnimal.Enabled = false;
+
+			btnDelete.Enabled = false;
+			btnCreate.Enabled = false;
+			btnUpdate.Enabled = false;
+
+			btnRecovery.Enabled = true;
+			btnRecovery.Visible = true;
+			ShowListOfDeleteAnimal();
+		}
+
+		private async void btnRecovery_Click(object sender, EventArgs e)
+		{
+			var animal = GetCurrentAnimal();
+			var isRecovered = await _animalRepository.RecoveryUserAsync(animal);
+			EmptyBoxes();
+			if (isRecovered)
+			{
+				MessageBox.Show("Recovered");
+			}
+			else
+			{
+				MessageBox.Show("Recover failed!");
+			}
+			btnCreate.Enabled = true;
+			btnRecovery.Enabled = false;
+			btnRecovery.Visible = false;
+			btnDeletedAnimal.Enabled = true;
+			btnCurrentAnimal.Enabled = false;
+			ShowListOfAnimal();
 		}
 	}
 }
