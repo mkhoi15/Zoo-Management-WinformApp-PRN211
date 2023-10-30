@@ -11,6 +11,8 @@ namespace Entities.Models
 		[StringLength(50)]
 		public string Name { get; set; } = string.Empty;
 
+		public bool IsDeleted { get; set; } = false;
+
 		public virtual ICollection<Cage> Cages { get; set; } = new List<Cage>();
 	}
 }
