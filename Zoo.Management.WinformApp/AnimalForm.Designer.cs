@@ -35,7 +35,7 @@
 			label5 = new Label();
 			label6 = new Label();
 			cbCage = new ComboBox();
-			dataGridView1 = new DataGridView();
+			dgvAnimal = new DataGridView();
 			txtID = new TextBox();
 			txtAnimalName = new TextBox();
 			txtSpecies = new TextBox();
@@ -43,7 +43,7 @@
 			btnCreate = new Button();
 			btnUpdate = new Button();
 			btnDelete = new Button();
-			((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -108,15 +108,15 @@
 			cbCage.Size = new Size(236, 28);
 			cbCage.TabIndex = 6;
 			// 
-			// dataGridView1
+			// dgvAnimal
 			// 
-			dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridView1.Location = new Point(427, 106);
-			dataGridView1.Name = "dataGridView1";
-			dataGridView1.RowHeadersWidth = 51;
-			dataGridView1.RowTemplate.Height = 29;
-			dataGridView1.Size = new Size(868, 521);
-			dataGridView1.TabIndex = 7;
+			dgvAnimal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvAnimal.Location = new Point(427, 106);
+			dgvAnimal.Name = "dgvAnimal";
+			dgvAnimal.RowHeadersWidth = 51;
+			dgvAnimal.RowTemplate.Height = 29;
+			dgvAnimal.Size = new Size(868, 521);
+			dgvAnimal.TabIndex = 7;
 			// 
 			// txtID
 			// 
@@ -188,7 +188,7 @@
 			Controls.Add(txtSpecies);
 			Controls.Add(txtAnimalName);
 			Controls.Add(txtID);
-			Controls.Add(dataGridView1);
+			Controls.Add(dgvAnimal);
 			Controls.Add(cbCage);
 			Controls.Add(label6);
 			Controls.Add(label5);
@@ -198,7 +198,7 @@
 			Controls.Add(label1);
 			Name = "AnimalForm";
 			Text = "AnimalForm";
-			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+			((System.ComponentModel.ISupportInitialize)dgvAnimal).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -212,7 +212,7 @@
 		private Label label5;
 		private Label label6;
 		private ComboBox cbCage;
-		private DataGridView dataGridView1;
+		private DataGridView dgvAnimal;
 		private TextBox txtID;
 		private TextBox txtAnimalName;
 		private TextBox txtSpecies;

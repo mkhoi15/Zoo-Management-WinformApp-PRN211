@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,16 @@ namespace Zoo.Management.WinformApp
 {
 	public partial class AnimalForm : Form
 	{
+		private readonly AnimalRepository _animalRepository;
+		private readonly CageRepository _cageRepository;
 		public AnimalForm()
 		{
+			_animalRepository = new AnimalRepository();
+			_cageRepository = new CageRepository();
 			InitializeComponent();
 		}
+
+
 
 		private void btnCreate_Click(object sender, EventArgs e)
 		{
