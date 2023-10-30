@@ -58,6 +58,9 @@
             animalToolStripMenuItem = new ToolStripMenuItem();
             animalStatusToolStripMenuItem = new ToolStripMenuItem();
             btnRecovery = new Button();
+            label9 = new Label();
+            txtSearch = new TextBox();
+            btnSearch = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -68,9 +71,9 @@
             dgvUser.Location = new Point(574, 42);
             dgvUser.Name = "dgvUser";
             dgvUser.RowTemplate.Height = 33;
-            dgvUser.Size = new Size(953, 494);
+            dgvUser.Size = new Size(953, 400);
             dgvUser.TabIndex = 27;
-            dgvUser.CellContentDoubleClick += dgvUser_CellContentDoubleClick;
+            dgvUser.CellDoubleClick += dgvUser_CellDoubleClick;
             // 
             // btnUpdate
             // 
@@ -309,15 +312,45 @@
             btnRecovery.TabIndex = 25;
             btnRecovery.Text = "Recovery";
             btnRecovery.UseVisualStyleBackColor = true;
+            btnRecovery.Visible = false;
             btnRecovery.Click += btnDelete_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(797, 465);
+            label9.Name = "label9";
+            label9.Size = new Size(73, 25);
+            label9.TabIndex = 29;
+            label9.Text = "Search: ";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(896, 462);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(386, 31);
+            txtSearch.TabIndex = 30;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(1297, 457);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(108, 41);
+            btnSearch.TabIndex = 25;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1607, 578);
+            ClientSize = new Size(1607, 643);
+            Controls.Add(txtSearch);
+            Controls.Add(label9);
             Controls.Add(dgvUser);
             Controls.Add(btnUpdate);
+            Controls.Add(btnSearch);
             Controls.Add(btnRecovery);
             Controls.Add(btnDelete);
             Controls.Add(btnCreate);
@@ -382,5 +415,8 @@
         private ToolStripMenuItem animalToolStripMenuItem;
         private ToolStripMenuItem animalStatusToolStripMenuItem;
         private Button btnRecovery;
+        private Label label9;
+        private TextBox txtSearch;
+        private Button btnSearch;
     }
 }
