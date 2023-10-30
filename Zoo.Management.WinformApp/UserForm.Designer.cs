@@ -61,6 +61,9 @@
             label9 = new Label();
             txtSearch = new TextBox();
             btnSearch = new Button();
+            btnDeletedList = new Button();
+            btnCurrentList = new Button();
+            btnClear = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -68,10 +71,10 @@
             // dgvUser
             // 
             dgvUser.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUser.Location = new Point(574, 42);
+            dgvUser.Location = new Point(574, 79);
             dgvUser.Name = "dgvUser";
             dgvUser.RowTemplate.Height = 33;
-            dgvUser.Size = new Size(953, 400);
+            dgvUser.Size = new Size(953, 363);
             dgvUser.TabIndex = 27;
             dgvUser.CellDoubleClick += dgvUser_CellDoubleClick;
             // 
@@ -313,7 +316,7 @@
             btnRecovery.Text = "Recovery";
             btnRecovery.UseVisualStyleBackColor = true;
             btnRecovery.Visible = false;
-            btnRecovery.Click += btnDelete_Click;
+            btnRecovery.Click += btnRecovery_Click;
             // 
             // label9
             // 
@@ -341,6 +344,37 @@
             btnSearch.UseVisualStyleBackColor = false;
             btnSearch.Click += btnSearch_Click;
             // 
+            // btnDeletedList
+            // 
+            btnDeletedList.Location = new Point(1361, 37);
+            btnDeletedList.Name = "btnDeletedList";
+            btnDeletedList.Size = new Size(166, 41);
+            btnDeletedList.TabIndex = 25;
+            btnDeletedList.Text = "Deleted Staff";
+            btnDeletedList.UseVisualStyleBackColor = false;
+            btnDeletedList.Click += btnDeletedList_Click;
+            // 
+            // btnCurrentList
+            // 
+            btnCurrentList.Enabled = false;
+            btnCurrentList.Location = new Point(1199, 37);
+            btnCurrentList.Name = "btnCurrentList";
+            btnCurrentList.Size = new Size(166, 41);
+            btnCurrentList.TabIndex = 25;
+            btnCurrentList.Text = "Current Staff";
+            btnCurrentList.UseVisualStyleBackColor = false;
+            btnCurrentList.Click += btnCurrentList_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(79, 495);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(108, 41);
+            btnClear.TabIndex = 24;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
+            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -350,9 +384,12 @@
             Controls.Add(label9);
             Controls.Add(dgvUser);
             Controls.Add(btnUpdate);
+            Controls.Add(btnCurrentList);
+            Controls.Add(btnDeletedList);
             Controls.Add(btnSearch);
             Controls.Add(btnRecovery);
             Controls.Add(btnDelete);
+            Controls.Add(btnClear);
             Controls.Add(btnCreate);
             Controls.Add(dtpDateOfBirth);
             Controls.Add(cbRole);
@@ -418,5 +455,8 @@
         private Label label9;
         private TextBox txtSearch;
         private Button btnSearch;
+        private Button btnDeletedList;
+        private Button btnCurrentList;
+        private Button btnClear;
     }
 }

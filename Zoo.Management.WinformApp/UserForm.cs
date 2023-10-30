@@ -19,10 +19,55 @@ namespace Zoo.Management.WinformApp
             this.ShowListUser();
         }
 
+        private ApplicationUser GetCurrentUser()
+        {
+            var userName = txtUserName.Text;
+            var password = txtPassword.Text;
+            var fullName = txtFullName.Text;
+            var email = txtEmail.Text;
+            var phoneNumber = txtPhoneNumber.Text;
+            var id = txtId.Text;
+
+            var gender = cbGender.Text;
+            var role = cbRole.Text;
+            var dob = dtpDateOfBirth.Value;
+
+            var currentUser = new ApplicationUser()
+            {
+                Id = int.Parse(id),
+                UserName = userName,
+                Password = password,
+                FullName = fullName,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                Gender = gender,
+                Role = role,
+                Dob = dob,
+                IsDeleted = false
+            };
+            return currentUser;
+        }
         private void ShowListUser()
         {
             _applicationUsers = _resipotory.GetAll()
                 .Where(u => u.IsDeleted == false)
+                .AsNoTracking().ToList();
+            dgvUser.DataSource = _applicationUsers.Select(u => new
+            {
+                Id = u.Id.ToString(),
+                userName = u.UserName,
+                fullName = u.FullName,
+                email = u.Email,
+                phoneNumber = u.PhoneNumber,
+                gender = u.Gender,
+                role = u.Role,
+                DateOfBirth = u.Dob,
+            }).ToList();
+        }
+        private void ShowDeletedUser()
+        {
+            _applicationUsers = _resipotory.GetAll()
+                .Where(u => u.IsDeleted == true)
                 .AsNoTracking().ToList();
             dgvUser.DataSource = _applicationUsers.Select(u => new
             {
@@ -95,39 +140,23 @@ namespace Zoo.Management.WinformApp
 
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
-            var userName = txtUserName.Text;
-            var password = txtPassword.Text;
-            var fullName = txtFullName.Text;
-            var email = txtEmail.Text;
-            var phoneNumber = txtPhoneNumber.Text;
-            var id = txtId.Text;
-
-            var gender = cbGender.Text;
-            var role = cbRole.Text;
-            var dob = dtpDateOfBirth.Value;
-
-            var newUser = new ApplicationUser()
-            {
-                Id = int.Parse(id),
-                UserName = userName,
-                Password = password,
-                FullName = fullName,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Gender = gender,
-                Role = role,
-                Dob = dob,
-                IsDeleted = false
-            };
-            await _resipotory.UpdateAsync(newUser);
+            var user = GetCurrentUser();
+            await _resipotory.UpdateAsync(user);
             EmptyBoxes();
             MessageBox.Show("Updated");
+            btnCreate.Enabled = true;
             ShowListUser();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-
+            var user = GetCurrentUser();
+            await _resipotory.DeleteUserAsync(user);
+            EmptyBoxes();
+            MessageBox.Show("Deleted");
+            btnCreate.Enabled = true;
+            btnDelete.Enabled = false;
+            ShowListUser();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -153,6 +182,51 @@ namespace Zoo.Management.WinformApp
             cbGender.Text = data.Gender.ToString();
             cbRole.Text = data.Role.ToString();
             dtpDateOfBirth.Text = data.Dob.ToString();
+        }
+
+        private void btnDeletedList_Click(object sender, EventArgs e)
+        {
+            btnCurrentList.Enabled = true;
+            btnDeletedList.Enabled = false;
+
+            btnDelete.Enabled = false;
+            btnCreate.Enabled = false;
+            btnUpdate.Enabled = false;
+
+            btnRecovery.Enabled = true;
+            btnRecovery.Visible = true;
+            ShowDeletedUser();
+        }
+
+        private void btnCurrentList_Click(object sender, EventArgs e)
+        {
+            btnDeletedList.Enabled = true;
+            btnCurrentList.Enabled = false;
+
+            btnCreate.Enabled = true;
+
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            ShowListUser();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            EmptyBoxes();
+            btnCreate.Enabled = true;
+            btnDelete.Enabled = false;
+            btnUpdate.Enabled = false;
+        }
+
+        private async void btnRecovery_Click(object sender, EventArgs e)
+        {
+            var user = GetCurrentUser();
+            await _resipotory.RecoveryUserAsync(user);
+            EmptyBoxes();
+            MessageBox.Show("Deleted");
+            btnCreate.Enabled = true;
+            btnRecovery.Enabled = false;
+            ShowListUser();
         }
     }
 
