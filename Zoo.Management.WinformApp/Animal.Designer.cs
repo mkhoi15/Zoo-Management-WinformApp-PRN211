@@ -33,9 +33,6 @@
 			lbSpecies = new Label();
 			lbAge = new Label();
 			lbCage = new Label();
-			txtName = new TextBox();
-			txtSpecies = new TextBox();
-			txtAge = new TextBox();
 			label1 = new Label();
 			btnCreate = new Button();
 			btnUpdate = new Button();
@@ -49,7 +46,7 @@
 			// dgvAnimal
 			// 
 			dgvAnimal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvAnimal.Location = new Point(556, 158);
+			dgvAnimal.Location = new Point(500, 115);
 			dgvAnimal.Margin = new Padding(4);
 			dgvAnimal.Name = "dgvAnimal";
 			dgvAnimal.RowHeadersWidth = 51;
@@ -92,35 +89,6 @@
 			lbCage.Size = new Size(52, 25);
 			lbCage.TabIndex = 4;
 			lbCage.Text = "Cage";
-			// 
-			// textBox1
-			// 
-			textBox1.Location = new Point(150, 126);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(273, 27);
-			textBox1.TabIndex = 5;
-			// 
-			// textBox2
-			// 
-			textBox2.Location = new Point(150, 197);
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(273, 27);
-			textBox2.TabIndex = 6;
-			// 
-			// textBox3
-			// 
-			textBox3.Location = new Point(150, 267);
-			textBox3.Name = "textBox3";
-			textBox3.Size = new Size(125, 27);
-			textBox3.TabIndex = 7;
-			// 
-			// comboBox1
-			// 
-			comboBox1.FormattingEnabled = true;
-			comboBox1.Location = new Point(150, 335);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(151, 28);
-			comboBox1.TabIndex = 8;
 			// 
 			// label1
 			// 
@@ -176,7 +144,7 @@
 			// 
 			txtId.Location = new Point(151, 110);
 			txtId.Name = "txtId";
-			txtId.Size = new Size(273, 27);
+			txtId.Size = new Size(273, 31);
 			txtId.TabIndex = 14;
 			// 
 			// cbCage
@@ -184,7 +152,7 @@
 			cbCage.FormattingEnabled = true;
 			cbCage.Location = new Point(151, 396);
 			cbCage.Name = "cbCage";
-			cbCage.Size = new Size(273, 28);
+			cbCage.Size = new Size(273, 33);
 			cbCage.TabIndex = 8;
 			// 
 			// Animal
@@ -196,10 +164,6 @@
 			Controls.Add(btnUpdate);
 			Controls.Add(btnCreate);
 			Controls.Add(label1);
-			Controls.Add(comboBox1);
-			Controls.Add(textBox3);
-			Controls.Add(textBox2);
-			Controls.Add(textBox1);
 			Controls.Add(lbCage);
 			Controls.Add(lbAge);
 			Controls.Add(lbSpecies);
