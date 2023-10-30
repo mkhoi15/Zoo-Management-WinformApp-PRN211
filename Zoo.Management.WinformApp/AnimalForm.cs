@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -169,7 +170,7 @@ namespace Zoo.Management.WinformApp
 			this.ClearTextBox();
 		}
 
-		private void btnDelete_Click(object sender, EventArgs e)
+		private async void btnDelete_Click(object sender, EventArgs e)
 		{
 			btnCreate.Enabled = true;
 			btnUpdate.Enabled = false;
@@ -191,7 +192,15 @@ namespace Zoo.Management.WinformApp
 				return;
 			}
 
-			_animalRepository.DeleteAsync(animal).Wait();
+			var isDeleted = await _animalRepository.DeleteUserAsync(animal);
+			if (isDeleted)
+			{
+				MessageBox.Show("Deleted");
+			}
+			else
+			{
+				MessageBox.Show("Delete failed!");
+			}
 
 			this.ShowListOfAnimal();
 
