@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231024152813_AddAnimal")]
-    partial class AddAnimal
+    [Migration("20231030074110_Inittial")]
+    partial class Inittial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,9 @@ namespace Entities.Migrations
                     b.Property<int>("CageId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Species")
                         .HasColumnType("nvarchar(max)");
 
@@ -52,6 +55,88 @@ namespace Entities.Migrations
                     b.ToTable("Animal", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.Models.ApplicationUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Dob")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Dob = new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3744),
+                            Email = "saigonzoo@gmail.com",
+                            FullName = "Admin",
+                            Gender = "Male",
+                            IsDeleted = false,
+                            Password = "12345",
+                            PhoneNumber = "1234567890",
+                            Role = "Admin",
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Dob = new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3756),
+                            Email = "saigonzoo@gmail.com",
+                            FullName = "Staff",
+                            Gender = "Male",
+                            IsDeleted = false,
+                            Password = "12345",
+                            PhoneNumber = "1234567890",
+                            Role = "Staff",
+                            UserName = "staff1"
+                        });
+                });
+
             modelBuilder.Entity("Entities.Models.Area", b =>
                 {
                     b.Property<int>("Id")
@@ -59,6 +144,9 @@ namespace Entities.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -86,62 +174,14 @@ namespace Entities.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AreaId");
 
                     b.ToTable("Cage", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Dob")
-                        .HasColumnType("Date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Entities.Models.Animal", b =>
