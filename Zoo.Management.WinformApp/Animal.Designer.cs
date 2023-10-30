@@ -33,14 +33,16 @@
 			lbSpecies = new Label();
 			lbAge = new Label();
 			lbCage = new Label();
-			textBox1 = new TextBox();
-			textBox2 = new TextBox();
-			textBox3 = new TextBox();
-			cbCage = new ComboBox();
+			txtName = new TextBox();
+			txtSpecies = new TextBox();
+			txtAge = new TextBox();
 			label1 = new Label();
 			btnCreate = new Button();
 			btnUpdate = new Button();
 			btnDelete = new Button();
+			lbId = new Label();
+			txtId = new TextBox();
+			cbCage = new ComboBox();
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
 			SuspendLayout();
 			// 
@@ -57,7 +59,7 @@
 			// lbName
 			// 
 			lbName.AutoSize = true;
-			lbName.Location = new Point(5, 126);
+			lbName.Location = new Point(6, 187);
 			lbName.Name = "lbName";
 			lbName.Size = new Size(100, 20);
 			lbName.TabIndex = 1;
@@ -66,7 +68,7 @@
 			// lbSpecies
 			// 
 			lbSpecies.AutoSize = true;
-			lbSpecies.Location = new Point(5, 200);
+			lbSpecies.Location = new Point(6, 261);
 			lbSpecies.Name = "lbSpecies";
 			lbSpecies.Size = new Size(59, 20);
 			lbSpecies.TabIndex = 2;
@@ -75,7 +77,7 @@
 			// lbAge
 			// 
 			lbAge.AutoSize = true;
-			lbAge.Location = new Point(5, 274);
+			lbAge.Location = new Point(6, 335);
 			lbAge.Name = "lbAge";
 			lbAge.Size = new Size(36, 20);
 			lbAge.TabIndex = 3;
@@ -84,40 +86,32 @@
 			// lbCage
 			// 
 			lbCage.AutoSize = true;
-			lbCage.Location = new Point(5, 343);
+			lbCage.Location = new Point(6, 404);
 			lbCage.Name = "lbCage";
 			lbCage.Size = new Size(43, 20);
 			lbCage.TabIndex = 4;
 			lbCage.Text = "Cage";
 			// 
-			// textBox1
+			// txtName
 			// 
-			textBox1.Location = new Point(150, 126);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(273, 27);
-			textBox1.TabIndex = 5;
+			txtName.Location = new Point(151, 187);
+			txtName.Name = "txtName";
+			txtName.Size = new Size(273, 27);
+			txtName.TabIndex = 5;
 			// 
-			// textBox2
+			// txtSpecies
 			// 
-			textBox2.Location = new Point(150, 197);
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(273, 27);
-			textBox2.TabIndex = 6;
+			txtSpecies.Location = new Point(151, 258);
+			txtSpecies.Name = "txtSpecies";
+			txtSpecies.Size = new Size(273, 27);
+			txtSpecies.TabIndex = 6;
 			// 
-			// textBox3
+			// txtAge
 			// 
-			textBox3.Location = new Point(150, 267);
-			textBox3.Name = "textBox3";
-			textBox3.Size = new Size(125, 27);
-			textBox3.TabIndex = 7;
-			// 
-			// cbCage
-			// 
-			cbCage.FormattingEnabled = true;
-			cbCage.Location = new Point(150, 335);
-			cbCage.Name = "cbCage";
-			cbCage.Size = new Size(151, 28);
-			cbCage.TabIndex = 8;
+			txtAge.Location = new Point(151, 328);
+			txtAge.Name = "txtAge";
+			txtAge.Size = new Size(273, 27);
+			txtAge.TabIndex = 7;
 			// 
 			// label1
 			// 
@@ -131,7 +125,7 @@
 			// 
 			// btnCreate
 			// 
-			btnCreate.Location = new Point(12, 450);
+			btnCreate.Location = new Point(13, 511);
 			btnCreate.Name = "btnCreate";
 			btnCreate.Size = new Size(94, 29);
 			btnCreate.TabIndex = 10;
@@ -141,7 +135,7 @@
 			// 
 			// btnUpdate
 			// 
-			btnUpdate.Location = new Point(163, 450);
+			btnUpdate.Location = new Point(164, 511);
 			btnUpdate.Name = "btnUpdate";
 			btnUpdate.Size = new Size(94, 29);
 			btnUpdate.TabIndex = 11;
@@ -151,7 +145,7 @@
 			// 
 			// btnDelete
 			// 
-			btnDelete.Location = new Point(314, 450);
+			btnDelete.Location = new Point(315, 511);
 			btnDelete.Name = "btnDelete";
 			btnDelete.Size = new Size(94, 29);
 			btnDelete.TabIndex = 12;
@@ -159,19 +153,45 @@
 			btnDelete.UseVisualStyleBackColor = true;
 			btnDelete.Click += btnDelete_Click;
 			// 
+			// lbId
+			// 
+			lbId.AutoSize = true;
+			lbId.Location = new Point(6, 117);
+			lbId.Name = "lbId";
+			lbId.Size = new Size(24, 20);
+			lbId.TabIndex = 13;
+			lbId.Text = "ID";
+			// 
+			// txtId
+			// 
+			txtId.Location = new Point(151, 110);
+			txtId.Name = "txtId";
+			txtId.Size = new Size(273, 27);
+			txtId.TabIndex = 14;
+			// 
+			// cbCage
+			// 
+			cbCage.FormattingEnabled = true;
+			cbCage.Location = new Point(151, 396);
+			cbCage.Name = "cbCage";
+			cbCage.Size = new Size(273, 28);
+			cbCage.TabIndex = 8;
+			// 
 			// Animal
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(1230, 673);
+			Controls.Add(txtId);
+			Controls.Add(lbId);
 			Controls.Add(btnDelete);
 			Controls.Add(btnUpdate);
 			Controls.Add(btnCreate);
 			Controls.Add(label1);
 			Controls.Add(cbCage);
-			Controls.Add(textBox3);
-			Controls.Add(textBox2);
-			Controls.Add(textBox1);
+			Controls.Add(txtAge);
+			Controls.Add(txtSpecies);
+			Controls.Add(txtName);
 			Controls.Add(lbCage);
 			Controls.Add(lbAge);
 			Controls.Add(lbSpecies);
@@ -191,13 +211,15 @@
 		private Label lbSpecies;
 		private Label lbAge;
 		private Label lbCage;
-		private TextBox textBox1;
-		private TextBox textBox2;
-		private TextBox textBox3;
-		private ComboBox cbCage;
+		private TextBox txtName;
+		private TextBox txtSpecies;
+		private TextBox txtAge;
 		private Label label1;
 		private Button btnCreate;
 		private Button btnUpdate;
 		private Button btnDelete;
+		private Label lbId;
+		private TextBox txtId;
+		private ComboBox cbCage;
 	}
 }
