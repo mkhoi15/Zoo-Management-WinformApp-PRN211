@@ -18,43 +18,7 @@ namespace Zoo.Management.WinformApp
 		private readonly CageRepository _cageRepository;
 		public Animal()
 		{
-			_animalRepository = new AnimalRepository();
-			_cageRepository = new CageRepository();
 			InitializeComponent();
-
-			ShowListOfAnimal();
-
-			var cages = _cageRepository.GetAll();
-			if (cages != null)
-			{
-				var listCage = cages.ToList();
-				cbCage.DataSource = listCage;
-				cbCage.DisplayMember = "CageName";
-				cbCage.ValueMember = "Id";
-			}
-
-		}
-
-		private void ShowListOfAnimal()
-		{
-			var listAnimal = _animalRepository.GetAll().Include(p => p.Cage)
-								.Select(a => new
-								{
-									Id = a.Id,
-									Name = a.AnimalName,
-									Age = a.Age,
-									Cage = a.Cage.CageName
-								}).ToList();
-
-			if (listAnimal != null)
-			{
-				dgvAnimal.DataSource = listAnimal;
-			}
-		}
-
-		public void ClearTextBox()
-		{
-
 		}
 
 		private void btnCreate_Click(object sender, EventArgs e)
@@ -69,7 +33,38 @@ namespace Zoo.Management.WinformApp
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
+			btnCreate.Enabled = true;
+			btnUpdate.Enabled = false;
+			btnDelete.Enabled = false;
 
+			var IsValidId = int.TryParse(txtAnimalName.Text, out int id);
+			if (IsValidId == false)
+			{
+				MessageBox.Show("ID is not valid");
+				btnDelete.Enabled = true;
+				return;
+			}
+
+			var animal = _AnimalRepository.GetAll().Where(c => c.Id == id).FirstOrDefault();
+			if (animal == null)
+			{
+				MessageBox.Show("Animal is not exist");
+				btnDelete.Enabled = true;
+				return;
+			}
+
+			_AnimalRepository.DeleteAsync(animal).Wait();
+
+			this.ShowListOfAnimals();
+
+			this.ClearText();
+		}
+		public void ClearText()
+		{
+			txtAnimalName.Text = "";
+			txtSpecies.Text = "";
+			txtAge.Text = "";
+			cbCage.Text = "";
 		}
 	}
 }
