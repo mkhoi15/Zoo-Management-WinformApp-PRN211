@@ -6,7 +6,7 @@ namespace Repositories
     {
 		public async Task<bool> DeleteUserAsync(Area area)
 		{
-			var areaDelete = await this.GetByIdAsync(area);
+			var areaDelete = await this.GetByIdAsync(area.Id);
 			if (areaDelete == null)
 			{
 				return false;

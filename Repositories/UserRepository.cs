@@ -7,12 +7,12 @@ namespace Repositories
 	{
         public async Task<bool> DeleteUserAsync(ApplicationUser user)
 		{
-			var userDelete = await this.GetByIdAsync(user);
+			var userDelete = await this.GetByIdAsync(user.Id);
 			if (userDelete == null)
 			{
 				return false;
 			}
-			user.IsDeleted = true;
+			userDelete.IsDeleted = true;
 			await _context.SaveChangesAsync();
 
 			return true;
