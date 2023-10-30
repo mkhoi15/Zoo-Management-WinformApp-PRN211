@@ -22,7 +22,7 @@ namespace Zoo.Management.WinformApp
 			var password = TxtPassword.Text;
 
 			var user = await _userRepository.GetAll()
-				.Where(u => u.UserName == userName && u.Password == password)
+				.Where(u => u.UserName == userName && u.Password == password && u.IsDeleted != true)
 				.AsNoTracking()
 				.FirstOrDefaultAsync();
 
@@ -35,7 +35,8 @@ namespace Zoo.Management.WinformApp
 
 			if (user.Role == "Admin") 
 			{
-				// form tiếp theo
+				UserForm userForm = new (user);
+				userForm.Show();
 				this.Hide();
 			}
 		}
