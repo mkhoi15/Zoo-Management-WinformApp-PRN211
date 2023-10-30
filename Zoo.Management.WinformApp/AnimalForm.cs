@@ -43,6 +43,7 @@ namespace Zoo.Management.WinformApp
 								.Include(p => p.Cage)
 								.Select(a => new
 								{
+									Id = a.Id,
 									Name = a.AnimalName,
 									Species = a.Species,
 									Age = a.Age,
@@ -63,6 +64,7 @@ namespace Zoo.Management.WinformApp
 								.Include(p => p.Cage)
 								.Select(a => new
 								{
+									Id = a.Id,
 									Name = a.AnimalName,
 									Species = a.Species,
 									Age = a.Age,
