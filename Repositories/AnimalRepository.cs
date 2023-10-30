@@ -16,5 +16,18 @@ namespace Repositories
 
 			return true;
 		}
+
+		public async Task<bool> RecoveryUserAsync(Animal animal)
+		{
+			var animalRecover = await this.GetByIdAsync(animal.Id);
+			if (animalRecover == null)
+			{
+				return false;
+			}
+			animalRecover.IsDelete = false;
+			await _context.SaveChangesAsync();
+
+			return true;
+		}
 	}
 }
