@@ -58,6 +58,12 @@
             animalToolStripMenuItem = new ToolStripMenuItem();
             animalStatusToolStripMenuItem = new ToolStripMenuItem();
             btnRecovery = new Button();
+            label9 = new Label();
+            txtSearch = new TextBox();
+            btnSearch = new Button();
+            btnDeletedList = new Button();
+            btnCurrentList = new Button();
+            btnClear = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -65,12 +71,12 @@
             // dgvUser
             // 
             dgvUser.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUser.Location = new Point(574, 42);
+            dgvUser.Location = new Point(574, 79);
             dgvUser.Name = "dgvUser";
             dgvUser.RowTemplate.Height = 33;
-            dgvUser.Size = new Size(953, 494);
+            dgvUser.Size = new Size(953, 363);
             dgvUser.TabIndex = 27;
-            dgvUser.CellContentDoubleClick += dgvUser_CellContentDoubleClick;
+            dgvUser.CellDoubleClick += dgvUser_CellDoubleClick;
             // 
             // btnUpdate
             // 
@@ -309,17 +315,81 @@
             btnRecovery.TabIndex = 25;
             btnRecovery.Text = "Recovery";
             btnRecovery.UseVisualStyleBackColor = true;
-            btnRecovery.Click += btnDelete_Click;
+            btnRecovery.Visible = false;
+            btnRecovery.Click += btnRecovery_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(797, 465);
+            label9.Name = "label9";
+            label9.Size = new Size(73, 25);
+            label9.TabIndex = 29;
+            label9.Text = "Search: ";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(896, 462);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(386, 31);
+            txtSearch.TabIndex = 30;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(1297, 457);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(108, 41);
+            btnSearch.TabIndex = 25;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // btnDeletedList
+            // 
+            btnDeletedList.Location = new Point(1361, 37);
+            btnDeletedList.Name = "btnDeletedList";
+            btnDeletedList.Size = new Size(166, 41);
+            btnDeletedList.TabIndex = 25;
+            btnDeletedList.Text = "Deleted Staff";
+            btnDeletedList.UseVisualStyleBackColor = false;
+            btnDeletedList.Click += btnDeletedList_Click;
+            // 
+            // btnCurrentList
+            // 
+            btnCurrentList.Enabled = false;
+            btnCurrentList.Location = new Point(1199, 37);
+            btnCurrentList.Name = "btnCurrentList";
+            btnCurrentList.Size = new Size(166, 41);
+            btnCurrentList.TabIndex = 25;
+            btnCurrentList.Text = "Current Staff";
+            btnCurrentList.UseVisualStyleBackColor = false;
+            btnCurrentList.Click += btnCurrentList_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(79, 495);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(108, 41);
+            btnClear.TabIndex = 24;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1607, 578);
+            ClientSize = new Size(1607, 643);
+            Controls.Add(txtSearch);
+            Controls.Add(label9);
             Controls.Add(dgvUser);
             Controls.Add(btnUpdate);
+            Controls.Add(btnCurrentList);
+            Controls.Add(btnDeletedList);
+            Controls.Add(btnSearch);
             Controls.Add(btnRecovery);
             Controls.Add(btnDelete);
+            Controls.Add(btnClear);
             Controls.Add(btnCreate);
             Controls.Add(dtpDateOfBirth);
             Controls.Add(cbRole);
@@ -382,5 +452,11 @@
         private ToolStripMenuItem animalToolStripMenuItem;
         private ToolStripMenuItem animalStatusToolStripMenuItem;
         private Button btnRecovery;
+        private Label label9;
+        private TextBox txtSearch;
+        private Button btnSearch;
+        private Button btnDeletedList;
+        private Button btnCurrentList;
+        private Button btnClear;
     }
 }

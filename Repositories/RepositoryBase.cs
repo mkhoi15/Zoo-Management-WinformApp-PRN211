@@ -5,7 +5,7 @@ namespace Repositories
 {
 	public class RepositoryBase<T> where T : class
 	{
-		private readonly ApplicationDbContext _context;
+		protected readonly ApplicationDbContext _context;
 		private readonly DbSet<T> _dbSet;
 
         public RepositoryBase()
@@ -30,14 +30,9 @@ namespace Repositories
 			tracker.State = EntityState.Modified;
 			await _context.SaveChangesAsync();
 		}
-		public async Task DeleteAsync(T entity)
-		{
-			_context.Remove(entity);
-			await _context.SaveChangesAsync();
-		}
-		public async Task<T?> GetByIdAsync(T entity)
+		public async Task<T?> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(entity);
+            return await _dbSet.FindAsync(id);
         }
 
     }

@@ -19,11 +19,39 @@ namespace Zoo.Management.WinformApp
             this.ShowListUser();
         }
 
+        private ApplicationUser GetCurrentUser()
+        {
+            var userName = txtUserName.Text;
+            var password = txtPassword.Text;
+            var fullName = txtFullName.Text;
+            var email = txtEmail.Text;
+            var phoneNumber = txtPhoneNumber.Text;
+            var id = txtId.Text;
+
+            var gender = cbGender.Text;
+            var role = cbRole.Text;
+            var dob = dtpDateOfBirth.Value;
+
+            var currentUser = new ApplicationUser()
+            {
+                Id = int.Parse(id),
+                UserName = userName,
+                Password = password,
+                FullName = fullName,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                Gender = gender,
+                Role = role,
+                Dob = dob,
+                IsDeleted = false
+            };
+            return currentUser;
+        }
         private void ShowListUser()
         {
             _applicationUsers = _resipotory.GetAll()
                 .Where(u => u.IsDeleted == false)
-				.AsNoTracking().ToList();
+                .AsNoTracking().ToList();
             dgvUser.DataSource = _applicationUsers.Select(u => new
             {
                 Id = u.Id.ToString(),
@@ -33,7 +61,41 @@ namespace Zoo.Management.WinformApp
                 phoneNumber = u.PhoneNumber,
                 gender = u.Gender,
                 role = u.Role,
-                dob = u.Dob,
+                DateOfBirth = u.Dob,
+            }).ToList();
+        }
+        private void ShowDeletedUser()
+        {
+            _applicationUsers = _resipotory.GetAll()
+                .Where(u => u.IsDeleted == true)
+                .AsNoTracking().ToList();
+            dgvUser.DataSource = _applicationUsers.Select(u => new
+            {
+                Id = u.Id.ToString(),
+                userName = u.UserName,
+                fullName = u.FullName,
+                email = u.Email,
+                phoneNumber = u.PhoneNumber,
+                gender = u.Gender,
+                role = u.Role,
+                DateOfBirth = u.Dob,
+            }).ToList();
+        }
+        private void Search(string searchString)
+        {
+            _applicationUsers = _resipotory.GetAll()
+                .Where(u => u.IsDeleted == false && u.FullName.Contains(searchString))
+                .AsNoTracking().ToList();
+            dgvUser.DataSource = _applicationUsers.Select(u => new
+            {
+                Id = u.Id.ToString(),
+                userName = u.UserName,
+                fullName = u.FullName,
+                email = u.Email,
+                phoneNumber = u.PhoneNumber,
+                gender = u.Gender,
+                role = u.Role,
+                DateOfBirth = u.Dob,
             }).ToList();
         }
         private void EmptyBoxes()
@@ -76,12 +138,47 @@ namespace Zoo.Management.WinformApp
             ShowListUser();
         }
 
-        private void dgvUser_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            var user = GetCurrentUser();
+            await _resipotory.UpdateAsync(user);
+            EmptyBoxes();
+            MessageBox.Show("Updated");
+            btnCreate.Enabled = true;
+            ShowListUser();
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            var user = GetCurrentUser();
+            var isDeleted = await _resipotory.DeleteUserAsync(user);
+            if (isDeleted)
+            {
+                MessageBox.Show("Deleted");
+            } else
+            {
+                MessageBox.Show("Delete failed!");
+            }
+            EmptyBoxes();
+            btnCreate.Enabled = true;
+            btnDelete.Enabled = false;
+            ShowListUser();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var searchString = txtSearch.Text;
+            Search(searchString);
+        }
+
+        private void dgvUser_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
             btnCreate.Enabled = false;
+
             var data = _applicationUsers[e.RowIndex];
+
             txtId.Text = data.Id.ToString();
             txtUserName.Text = data.UserName;
             txtPassword.Text = data.Password;
@@ -91,46 +188,61 @@ namespace Zoo.Management.WinformApp
             cbGender.Text = data.Gender.ToString();
             cbRole.Text = data.Role.ToString();
             dtpDateOfBirth.Text = data.Dob.ToString();
-
         }
 
-        private async void btnUpdate_Click(object sender, EventArgs e)
+        private void btnDeletedList_Click(object sender, EventArgs e)
         {
-            var userName = txtUserName.Text;
-            var password = txtPassword.Text;
-            var fullName = txtFullName.Text;
-            var email = txtEmail.Text;
-            var phoneNumber = txtPhoneNumber.Text;
-            var id = txtId.Text;
+            btnCurrentList.Enabled = true;
+            btnDeletedList.Enabled = false;
 
-            var gender = cbGender.Text;
-            var role = cbRole.Text;
-            var dob = dtpDateOfBirth.Value;
+            btnDelete.Enabled = false;
+            btnCreate.Enabled = false;
+            btnUpdate.Enabled = false;
 
-            var newUser = new ApplicationUser()
-            {
-                Id = int.Parse(id),
-                UserName = userName,
-                Password = password,
-                FullName = fullName,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Gender = gender,
-                Role = role,
-                Dob = dob,
-            };
-            await _resipotory.UpdateAsync(newUser);
-            EmptyBoxes();
-            MessageBox.Show("Updated");
+            btnRecovery.Enabled = true;
+            btnRecovery.Visible = true;
+            ShowDeletedUser();
+        }
+
+        private void btnCurrentList_Click(object sender, EventArgs e)
+        {
+            btnDeletedList.Enabled = true;
+            btnCurrentList.Enabled = false;
+
+            btnCreate.Enabled = true;
+
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
             ShowListUser();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-
+            EmptyBoxes();
+            btnCreate.Enabled = true;
+            btnDelete.Enabled = false;
+            btnUpdate.Enabled = false;
         }
 
-
+        private async void btnRecovery_Click(object sender, EventArgs e)
+        {
+            var user = GetCurrentUser();
+            var isRecovered = await _resipotory.RecoveryUserAsync(user);
+            EmptyBoxes();
+            if (isRecovered)
+            {
+                MessageBox.Show("Recovered");
+            } else
+            {
+                MessageBox.Show("Recover failed!");
+            }
+            btnCreate.Enabled = true;
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            btnDeletedList.Enabled=true;
+            btnCurrentList.Enabled=false;
+            ShowListUser();
+        }
     }
 
 }
