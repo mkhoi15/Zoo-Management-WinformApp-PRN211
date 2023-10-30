@@ -33,118 +33,101 @@
 			lbSpecies = new Label();
 			lbAge = new Label();
 			lbCage = new Label();
-			txtAnimalName = new TextBox();
+			txtName = new TextBox();
 			txtSpecies = new TextBox();
 			txtAge = new TextBox();
-			cbCage = new ComboBox();
 			label1 = new Label();
 			btnCreate = new Button();
 			btnUpdate = new Button();
 			btnDelete = new Button();
+			lbId = new Label();
+			txtId = new TextBox();
+			cbCage = new ComboBox();
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
 			SuspendLayout();
 			// 
 			// dgvAnimal
 			// 
 			dgvAnimal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvAnimal.Location = new Point(556, 158);
-			dgvAnimal.Margin = new Padding(4);
+			dgvAnimal.Location = new Point(445, 126);
 			dgvAnimal.Name = "dgvAnimal";
 			dgvAnimal.RowHeadersWidth = 51;
 			dgvAnimal.RowTemplate.Height = 29;
-			dgvAnimal.Size = new Size(966, 572);
+			dgvAnimal.Size = new Size(773, 458);
 			dgvAnimal.TabIndex = 0;
 			// 
 			// lbName
 			// 
 			lbName.AutoSize = true;
-			lbName.Location = new Point(6, 158);
-			lbName.Margin = new Padding(4, 0, 4, 0);
+			lbName.Location = new Point(6, 187);
 			lbName.Name = "lbName";
-			lbName.Size = new Size(119, 25);
+			lbName.Size = new Size(100, 20);
 			lbName.TabIndex = 1;
 			lbName.Text = "Animal Name";
 			// 
 			// lbSpecies
 			// 
 			lbSpecies.AutoSize = true;
-			lbSpecies.Location = new Point(6, 250);
-			lbSpecies.Margin = new Padding(4, 0, 4, 0);
+			lbSpecies.Location = new Point(6, 261);
 			lbSpecies.Name = "lbSpecies";
-			lbSpecies.Size = new Size(71, 25);
+			lbSpecies.Size = new Size(59, 20);
 			lbSpecies.TabIndex = 2;
 			lbSpecies.Text = "Species";
 			// 
 			// lbAge
 			// 
 			lbAge.AutoSize = true;
-			lbAge.Location = new Point(6, 342);
-			lbAge.Margin = new Padding(4, 0, 4, 0);
+			lbAge.Location = new Point(6, 335);
 			lbAge.Name = "lbAge";
-			lbAge.Size = new Size(44, 25);
+			lbAge.Size = new Size(36, 20);
 			lbAge.TabIndex = 3;
 			lbAge.Text = "Age";
 			// 
 			// lbCage
 			// 
 			lbCage.AutoSize = true;
-			lbCage.Location = new Point(6, 429);
-			lbCage.Margin = new Padding(4, 0, 4, 0);
+			lbCage.Location = new Point(6, 404);
 			lbCage.Name = "lbCage";
-			lbCage.Size = new Size(52, 25);
+			lbCage.Size = new Size(43, 20);
 			lbCage.TabIndex = 4;
 			lbCage.Text = "Cage";
 			// 
-			// txtAnimalName
+			// txtName
 			// 
-			txtAnimalName.Location = new Point(188, 158);
-			txtAnimalName.Margin = new Padding(4);
-			txtAnimalName.Name = "txtAnimalName";
-			txtAnimalName.Size = new Size(340, 31);
-			txtAnimalName.TabIndex = 5;
+			txtName.Location = new Point(151, 187);
+			txtName.Name = "txtName";
+			txtName.Size = new Size(273, 27);
+			txtName.TabIndex = 5;
 			// 
 			// txtSpecies
 			// 
-			txtSpecies.Location = new Point(188, 246);
-			txtSpecies.Margin = new Padding(4);
+			txtSpecies.Location = new Point(151, 258);
 			txtSpecies.Name = "txtSpecies";
-			txtSpecies.Size = new Size(340, 31);
+			txtSpecies.Size = new Size(273, 27);
 			txtSpecies.TabIndex = 6;
 			// 
 			// txtAge
 			// 
-			txtAge.Location = new Point(188, 334);
-			txtAge.Margin = new Padding(4);
+			txtAge.Location = new Point(151, 328);
 			txtAge.Name = "txtAge";
-			txtAge.Size = new Size(155, 31);
+			txtAge.Size = new Size(273, 27);
 			txtAge.TabIndex = 7;
-			// 
-			// cbCage
-			// 
-			cbCage.FormattingEnabled = true;
-			cbCage.Location = new Point(188, 419);
-			cbCage.Margin = new Padding(4);
-			cbCage.Name = "cbCage";
-			cbCage.Size = new Size(188, 33);
-			cbCage.TabIndex = 8;
 			// 
 			// label1
 			// 
 			label1.AutoSize = true;
 			label1.BackColor = SystemColors.InactiveCaption;
-			label1.Location = new Point(620, 28);
-			label1.Margin = new Padding(4, 0, 4, 0);
+			label1.Location = new Point(496, 22);
 			label1.Name = "label1";
-			label1.Size = new Size(150, 25);
+			label1.Size = new Size(125, 20);
 			label1.TabIndex = 9;
 			label1.Text = "Welcome to ZMA";
 			// 
 			// btnCreate
 			// 
-			btnCreate.Location = new Point(15, 562);
-			btnCreate.Margin = new Padding(4);
+			btnCreate.Location = new Point(13, 511);
 			btnCreate.Name = "btnCreate";
-			btnCreate.Size = new Size(118, 36);
+			btnCreate.Size = new Size(94, 29);
 			btnCreate.TabIndex = 10;
 			btnCreate.Text = "Create";
 			btnCreate.UseVisualStyleBackColor = true;
@@ -152,10 +135,9 @@
 			// 
 			// btnUpdate
 			// 
-			btnUpdate.Location = new Point(204, 562);
-			btnUpdate.Margin = new Padding(4);
+			btnUpdate.Location = new Point(164, 511);
 			btnUpdate.Name = "btnUpdate";
-			btnUpdate.Size = new Size(118, 36);
+			btnUpdate.Size = new Size(94, 29);
 			btnUpdate.TabIndex = 11;
 			btnUpdate.Text = "Update";
 			btnUpdate.UseVisualStyleBackColor = true;
@@ -163,20 +145,45 @@
 			// 
 			// btnDelete
 			// 
-			btnDelete.Location = new Point(392, 562);
-			btnDelete.Margin = new Padding(4);
+			btnDelete.Location = new Point(315, 511);
 			btnDelete.Name = "btnDelete";
-			btnDelete.Size = new Size(118, 36);
+			btnDelete.Size = new Size(94, 29);
 			btnDelete.TabIndex = 12;
 			btnDelete.Text = "Delete";
 			btnDelete.UseVisualStyleBackColor = true;
 			btnDelete.Click += btnDelete_Click;
 			// 
+			// lbId
+			// 
+			lbId.AutoSize = true;
+			lbId.Location = new Point(6, 117);
+			lbId.Name = "lbId";
+			lbId.Size = new Size(24, 20);
+			lbId.TabIndex = 13;
+			lbId.Text = "ID";
+			// 
+			// txtId
+			// 
+			txtId.Location = new Point(151, 110);
+			txtId.Name = "txtId";
+			txtId.Size = new Size(273, 27);
+			txtId.TabIndex = 14;
+			// 
+			// cbCage
+			// 
+			cbCage.FormattingEnabled = true;
+			cbCage.Location = new Point(151, 396);
+			cbCage.Name = "cbCage";
+			cbCage.Size = new Size(273, 28);
+			cbCage.TabIndex = 8;
+			// 
 			// Animal
 			// 
-			AutoScaleDimensions = new SizeF(10F, 25F);
+			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(1538, 841);
+			ClientSize = new Size(1230, 673);
+			Controls.Add(txtId);
+			Controls.Add(lbId);
 			Controls.Add(btnDelete);
 			Controls.Add(btnUpdate);
 			Controls.Add(btnCreate);
@@ -184,13 +191,12 @@
 			Controls.Add(cbCage);
 			Controls.Add(txtAge);
 			Controls.Add(txtSpecies);
-			Controls.Add(txtAnimalName);
+			Controls.Add(txtName);
 			Controls.Add(lbCage);
 			Controls.Add(lbAge);
 			Controls.Add(lbSpecies);
 			Controls.Add(lbName);
 			Controls.Add(dgvAnimal);
-			Margin = new Padding(4);
 			Name = "Animal";
 			Text = "Animal";
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).EndInit();
@@ -205,13 +211,15 @@
 		private Label lbSpecies;
 		private Label lbAge;
 		private Label lbCage;
-		private TextBox txtAnimalName;
+		private TextBox txtName;
 		private TextBox txtSpecies;
 		private TextBox txtAge;
-		private ComboBox cbCage;
 		private Label label1;
 		private Button btnCreate;
 		private Button btnUpdate;
 		private Button btnDelete;
+		private Label lbId;
+		private TextBox txtId;
+		private ComboBox cbCage;
 	}
 }
