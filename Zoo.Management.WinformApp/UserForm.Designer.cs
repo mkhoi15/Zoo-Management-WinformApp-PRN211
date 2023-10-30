@@ -52,11 +52,12 @@
             label1 = new Label();
             menuStrip1 = new MenuStrip();
             staffToolStripMenuItem = new ToolStripMenuItem();
-            zooTrainerToolStripMenuItem = new ToolStripMenuItem();
-            animalToolStripMenuItem = new ToolStripMenuItem();
             areasCagesToolStripMenuItem = new ToolStripMenuItem();
             animalToolStripMenuItem1 = new ToolStripMenuItem();
+            zooTrainerToolStripMenuItem = new ToolStripMenuItem();
+            animalToolStripMenuItem = new ToolStripMenuItem();
             animalStatusToolStripMenuItem = new ToolStripMenuItem();
+            btnRecovery = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -74,7 +75,7 @@
             // btnUpdate
             // 
             btnUpdate.Enabled = false;
-            btnUpdate.Location = new Point(218, 448);
+            btnUpdate.Location = new Point(247, 401);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(108, 41);
             btnUpdate.TabIndex = 26;
@@ -85,7 +86,7 @@
             // btnDelete
             // 
             btnDelete.Enabled = false;
-            btnDelete.Location = new Point(218, 495);
+            btnDelete.Location = new Point(417, 401);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(108, 41);
             btnDelete.TabIndex = 25;
@@ -95,7 +96,7 @@
             // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(218, 401);
+            btnCreate.Location = new Point(79, 401);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(108, 41);
             btnCreate.TabIndex = 24;
@@ -268,6 +269,18 @@
             staffToolStripMenuItem.Size = new Size(60, 29);
             staffToolStripMenuItem.Text = "Staff";
             // 
+            // areasCagesToolStripMenuItem
+            // 
+            areasCagesToolStripMenuItem.Name = "areasCagesToolStripMenuItem";
+            areasCagesToolStripMenuItem.Size = new Size(183, 30);
+            areasCagesToolStripMenuItem.Text = "Areas/Cages";
+            // 
+            // animalToolStripMenuItem1
+            // 
+            animalToolStripMenuItem1.Name = "animalToolStripMenuItem1";
+            animalToolStripMenuItem1.Size = new Size(183, 30);
+            animalToolStripMenuItem1.Text = "Animal";
+            // 
             // zooTrainerToolStripMenuItem
             // 
             zooTrainerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { animalToolStripMenuItem, animalStatusToolStripMenuItem });
@@ -281,23 +294,22 @@
             animalToolStripMenuItem.Size = new Size(192, 30);
             animalToolStripMenuItem.Text = "Animal";
             // 
-            // areasCagesToolStripMenuItem
-            // 
-            areasCagesToolStripMenuItem.Name = "areasCagesToolStripMenuItem";
-            areasCagesToolStripMenuItem.Size = new Size(183, 30);
-            areasCagesToolStripMenuItem.Text = "Areas/Cages";
-            // 
-            // animalToolStripMenuItem1
-            // 
-            animalToolStripMenuItem1.Name = "animalToolStripMenuItem1";
-            animalToolStripMenuItem1.Size = new Size(183, 30);
-            animalToolStripMenuItem1.Text = "Animal";
-            // 
             // animalStatusToolStripMenuItem
             // 
             animalStatusToolStripMenuItem.Name = "animalStatusToolStripMenuItem";
             animalStatusToolStripMenuItem.Size = new Size(192, 30);
             animalStatusToolStripMenuItem.Text = "Animal Status";
+            // 
+            // btnRecovery
+            // 
+            btnRecovery.Enabled = false;
+            btnRecovery.Location = new Point(417, 495);
+            btnRecovery.Name = "btnRecovery";
+            btnRecovery.Size = new Size(108, 41);
+            btnRecovery.TabIndex = 25;
+            btnRecovery.Text = "Recovery";
+            btnRecovery.UseVisualStyleBackColor = true;
+            btnRecovery.Click += btnDelete_Click;
             // 
             // UserForm
             // 
@@ -306,6 +318,7 @@
             ClientSize = new Size(1607, 578);
             Controls.Add(dgvUser);
             Controls.Add(btnUpdate);
+            Controls.Add(btnRecovery);
             Controls.Add(btnDelete);
             Controls.Add(btnCreate);
             Controls.Add(dtpDateOfBirth);
@@ -368,5 +381,6 @@
         private ToolStripMenuItem zooTrainerToolStripMenuItem;
         private ToolStripMenuItem animalToolStripMenuItem;
         private ToolStripMenuItem animalStatusToolStripMenuItem;
+        private Button btnRecovery;
     }
 }

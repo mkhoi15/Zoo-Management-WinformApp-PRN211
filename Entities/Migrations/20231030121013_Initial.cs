@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Entities.Migrations
 {
     /// <inheritdoc />
-    public partial class Inittial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -97,8 +97,8 @@ namespace Entities.Migrations
                 columns: new[] { "Id", "Dob", "Email", "FullName", "Gender", "IsDeleted", "Password", "PhoneNumber", "Role", "UserName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3744), "saigonzoo@gmail.com", "Admin", "Male", false, "12345", "1234567890", "Admin", "admin" },
-                    { 2, new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3756), "saigonzoo@gmail.com", "Staff", "Male", false, "12345", "1234567890", "Staff", "staff1" }
+                    { 1, new DateTime(2023, 10, 30, 19, 10, 13, 26, DateTimeKind.Local).AddTicks(3621), "saigonzoo@gmail.com", "Admin", "Male", false, "12345", "1234567890", "Admin", "admin" },
+                    { 2, new DateTime(2023, 10, 30, 19, 10, 13, 26, DateTimeKind.Local).AddTicks(3632), "saigonzoo@gmail.com", "Staff", "Male", false, "12345", "1234567890", "Staff", "staff1" }
                 });
 
             migrationBuilder.CreateIndex(

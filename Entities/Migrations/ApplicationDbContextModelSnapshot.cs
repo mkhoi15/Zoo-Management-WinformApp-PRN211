@@ -109,7 +109,7 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            Dob = new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3744),
+                            Dob = new DateTime(2023, 10, 30, 19, 10, 13, 26, DateTimeKind.Local).AddTicks(3621),
                             Email = "saigonzoo@gmail.com",
                             FullName = "Admin",
                             Gender = "Male",
@@ -122,7 +122,7 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 2,
-                            Dob = new DateTime(2023, 10, 30, 14, 41, 10, 760, DateTimeKind.Local).AddTicks(3756),
+                            Dob = new DateTime(2023, 10, 30, 19, 10, 13, 26, DateTimeKind.Local).AddTicks(3632),
                             Email = "saigonzoo@gmail.com",
                             FullName = "Staff",
                             Gender = "Male",
