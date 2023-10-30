@@ -7,8 +7,8 @@ namespace Entities.Helper
 	{
         public CageValidationHelper()
         {
-            RuleFor(c => c.CageName).NotNull().NotEmpty();
-            RuleFor(c => c.AreaId).NotNull().NotEmpty();
+            RuleFor(c => c.CageName).NotNull().NotEmpty().WithMessage("Cage name can not be empty!");
+            RuleFor(c => c.AreaId).NotNull().NotEmpty().WithMessage("Area can not be empty!");
         }
     }
 }
