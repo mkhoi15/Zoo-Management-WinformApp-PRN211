@@ -96,7 +96,7 @@ namespace Zoo.Management.WinformApp
                 var cage = cageRepository.GetAll().Where(c => c.Id == id && !c.IsDeleted).FirstOrDefault();
                 if (cage is null)
                 {
-                    MessageBox.Show("Cage was not found. Can not update!");
+                    MessageBox.Show("Cage is not found. Can not update!");
                     btnUpdate.Enabled = true;
                     return;
                 }
@@ -132,9 +132,65 @@ namespace Zoo.Management.WinformApp
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                btnDelete.Enabled = false;
 
+                var id = CheckValidId();
+                if (id <= 0) return;
+
+                var deleteCage = new Cage();
+
+                var cageName = txtName.Text;
+                var area = cbArea.SelectedItem as Area;
+
+                if (cageName == "" && area is null)
+                {
+                    deleteCage = cageRepository.GetAll().Where(c => c.Id == id).FirstOrDefault();
+                }
+                else
+                {
+                    if (area is null)
+                    {
+                        MessageBox.Show("Please choose area");
+                        btnDelete.Enabled = true;
+                        return;
+                    }
+                    deleteCage = cageRepository.GetAll().Where(c => c.Id == id
+                                                                && c.CageName == cageName
+                                                                && c.AreaId == area.Id).FirstOrDefault();
+                }
+
+                if (deleteCage is null)
+                {
+                    MessageBox.Show("Cage is not found. Can not delete!");
+                    btnDelete.Enabled = true;
+                    return;
+                }
+                if (deleteCage.IsDeleted)
+                {
+                    MessageBox.Show("Cage is deleted. Can not delete again!");
+                    btnDelete.Enabled = true;
+                    return;
+                }
+
+                deleteCage.IsDeleted = true;
+
+                await cageRepository.UpdateAsync(deleteCage);
+
+                GetDataForDataGridView();
+
+                ClearText();
+                btnCreate.Enabled = true;
+                btnUpdate.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                btnDelete.Enabled = true; 
+            }
         }
 
         private void ClearText()
