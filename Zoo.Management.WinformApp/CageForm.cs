@@ -38,7 +38,14 @@ namespace Zoo.Management.WinformApp
 
         private void dgvListCage_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            btnCreate.Enabled = false;
 
+            var row = dgvListCage.Rows[e.RowIndex];
+            txtId.Text = row.Cells[0].Value.ToString();
+            txtName.Text = row.Cells[1].Value.ToString();
+            cbArea.Text = row.Cells[2].Value.ToString();
         }
 
         private async void btnCreate_Click(object sender, EventArgs e)
