@@ -43,6 +43,7 @@ namespace Zoo.Management.WinformApp
 
         private async void btnCreate_Click(object sender, EventArgs e)
         {
+            btnCreate.Enabled = false;
             try
             {
                 var cageName = txtName.Text;
@@ -65,9 +66,14 @@ namespace Zoo.Management.WinformApp
                 await cageRepository.AddAsync(newCage);
                 GetDataForDataGridView();
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ClearText();
+                btnCreate.Enabled = true;
             }
         }
 
@@ -81,10 +87,16 @@ namespace Zoo.Management.WinformApp
 
         }
 
+        private void ClearText()
+        {
+            txtId.Text = "";
+            txtName.Text = "";
+        }
+
         private void GetDataForDataGridView()
         {
             var cageList = cageRepository.GetAll().Include(c => c.Area).ToList();
-            if(cageList.Count > 0 && cageList is not null)
+            if (cageList.Count > 0 && cageList is not null)
             {
                 dgvListCage.DataSource = cageList.Select(c => new
                 {
@@ -107,7 +119,7 @@ namespace Zoo.Management.WinformApp
             return id;
         }
 
-        private bool CheckValidation(Cage cage) 
+        private bool CheckValidation(Cage cage)
         {
             CageValidationHelper validator = new();
             var result = validator.Validate(cage);

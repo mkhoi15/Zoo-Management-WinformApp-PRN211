@@ -124,6 +124,7 @@
             // 
             // btnUpdate
             // 
+            btnUpdate.Enabled = false;
             btnUpdate.Location = new Point(129, 188);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(75, 23);
@@ -134,6 +135,7 @@
             // 
             // btnDelete
             // 
+            btnDelete.Enabled = false;
             btnDelete.Location = new Point(210, 188);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 23);
