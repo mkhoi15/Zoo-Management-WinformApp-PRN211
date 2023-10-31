@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Helper;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.ApplicationServices;
 using Repositories;
@@ -29,13 +30,18 @@ namespace Zoo.Management.WinformApp
 			ShowListOfAnimal();
 
 			var cage = _cageRepository.GetAll();
+			var listCage = new List<Cage>();
 			if (cage != null)
 			{
-				var listCage = cage.ToList();
-				cbCage.DataSource = listCage;
-				cbCage.DisplayMember = "CageName";
-				cbCage.ValueMember = "Id";
+				listCage = cage.ToList();
 			}
+			listCage.Insert(0, new Cage { Id = 0, CageName = "Select Cage" });
+			cbCage.DataSource = listCage;
+			cbCage.DisplayMember = "CageName";
+			cbCage.ValueMember = "Id";
+
+			btnUpdate.Enabled = false;
+			btnDelete.Enabled = false;
 
 		}
 
@@ -45,6 +51,7 @@ namespace Zoo.Management.WinformApp
 			var animalName = txtAnimalName.Text;
 			var species = txtSpecies.Text;
 			var age = txtAge.Text;
+			var cage = cbCage.SelectedItem as Cage;
 
 			var currentAnimal = new Animal()
 			{
@@ -52,6 +59,7 @@ namespace Zoo.Management.WinformApp
 				AnimalName = animalName,
 				Species = species,
 				Age = int.Parse(age),
+				Cage = cage,
 				IsDelete = false
 			};
 			return currentAnimal;
@@ -70,11 +78,10 @@ namespace Zoo.Management.WinformApp
 									Age = a.Age,
 									Cage = a.Cage.CageName
 								}).ToList();
-			var animal = _cageRepository.GetAll().Include(a => a.CageName).ToList();
 
-			if (animal != null)
+			if (listAnimal != null)
 			{
-				dgvAnimal.DataSource = animal;
+				dgvAnimal.DataSource = listAnimal;
 			}
 		}
 
@@ -91,11 +98,11 @@ namespace Zoo.Management.WinformApp
 									Age = a.Age,
 									Cage = a.Cage.CageName
 								}).ToList();
-			var animal = _cageRepository.GetAll().Include(a => a.CageName).ToList();
 
-			if (animal != null)
+
+			if (listAnimal != null)
 			{
-				dgvAnimal.DataSource = animal;
+				dgvAnimal.DataSource = listAnimal;
 			}
 		}
 
@@ -112,6 +119,8 @@ namespace Zoo.Management.WinformApp
 		private async void btnCreate_Click(object sender, EventArgs e)
 		{
 			btnCreate.Enabled = false;
+			btnDelete.Enabled = false;
+			btnUpdate.Enabled = false;
 			var animalName = txtAnimalName.Text;
 			var animalSpecies = txtSpecies.Text;
 
@@ -119,7 +128,7 @@ namespace Zoo.Management.WinformApp
 
 			if (!isValidAge || age < 0)
 			{
-				btnUpdate.Enabled = true;
+				btnCreate.Enabled = true;
 				MessageBox.Show("Invalid Age");
 				return;
 			}
@@ -127,7 +136,7 @@ namespace Zoo.Management.WinformApp
 			if (cbCage.SelectedItem == null)
 			{
 				MessageBox.Show("Please select the cage for Animal");
-				btnUpdate.Enabled = true;
+				btnCreate.Enabled = true;
 				return;
 			}
 
@@ -138,8 +147,19 @@ namespace Zoo.Management.WinformApp
 				AnimalName = animalName,
 				Species = animalSpecies,
 				Age = age,
-				Cage = cage
+				
+				CageId = cage.Id
 			};
+
+			AnimalValidationHelper validator = new();
+			var result = validator.Validate(animal);
+
+			if (!result.IsValid)
+			{
+				var errorsMessage = result.ToString("\n");
+				MessageBox.Show(errorsMessage);
+				return;
+			}
 
 			await _animalRepository.AddAsync(animal);
 
@@ -159,7 +179,7 @@ namespace Zoo.Management.WinformApp
 
 			if (!isValidAge || age < 0)
 			{
-				btnCreate.Enabled = true;
+				btnUpdate.Enabled = true;
 				MessageBox.Show("Invalid Age");
 				return;
 			}
@@ -167,7 +187,7 @@ namespace Zoo.Management.WinformApp
 			if (cbCage.SelectedItem == null)
 			{
 				MessageBox.Show("Please select the cage for Animal");
-				btnCreate.Enabled = true;
+				btnUpdate.Enabled = true;
 				return;
 			}
 
@@ -179,8 +199,18 @@ namespace Zoo.Management.WinformApp
 				AnimalName = animalName,
 				Species = animalSpecies,
 				Age = age,
-				Cage = cage
+				CageId = cage.Id
 			};
+
+			AnimalValidationHelper validator = new();
+			var result = validator.Validate(animal);
+
+			if (!result.IsValid)
+			{
+				var errorsMessage = result.ToString("\n");
+				MessageBox.Show(errorsMessage);
+				return;
+			}
 
 			await _animalRepository.UpdateAsync(animal);
 
@@ -254,11 +284,11 @@ namespace Zoo.Management.WinformApp
 									Age = a.Age,
 									Cage = a.Cage.CageName
 								}).ToList();
-			var animal = _cageRepository.GetAll().Include(a => a.CageName).ToList();
+			
 
-			if (animal != null)
+			if (listAnimal != null)
 			{
-				dgvAnimal.DataSource = animal;
+				dgvAnimal.DataSource = listAnimal;
 			}
 		}
 
