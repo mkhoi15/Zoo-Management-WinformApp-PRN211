@@ -31,10 +31,9 @@ namespace Zoo.Management.WinformApp
 
 			var cage = _cageRepository.GetAll();
 			var listCage = new List<Cage>();
-			if (cage != null)
-			{
-				listCage = cage.ToList();
-			}
+			
+			listCage = cage.ToList();
+			
 			listCage.Insert(0, new Cage { Id = 0, CageName = "Select Cage" });
 			cbCage.DataSource = listCage;
 			cbCage.DisplayMember = "CageName";
@@ -79,10 +78,7 @@ namespace Zoo.Management.WinformApp
 									Cage = a.Cage.CageName
 								}).ToList();
 
-			if (listAnimal != null)
-			{
-				dgvAnimal.DataSource = listAnimal;
-			}
+			dgvAnimal.DataSource = listAnimal;
 		}
 
 		private void ShowListOfDeleteAnimal()
@@ -100,10 +96,8 @@ namespace Zoo.Management.WinformApp
 								}).ToList();
 
 
-			if (listAnimal != null)
-			{
-				dgvAnimal.DataSource = listAnimal;
-			}
+			dgvAnimal.DataSource = listAnimal;
+			
 		}
 
 		private void ClearTextBox()
@@ -286,10 +280,8 @@ namespace Zoo.Management.WinformApp
 								}).ToList();
 			
 
-			if (listAnimal != null)
-			{
-				dgvAnimal.DataSource = listAnimal;
-			}
+			dgvAnimal.DataSource = listAnimal;
+			
 		}
 
 		private void EmptyBoxes()
