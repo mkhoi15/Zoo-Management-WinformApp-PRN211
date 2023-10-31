@@ -27,7 +27,7 @@ namespace Zoo.Management.WinformApp
 
             GetDataForDataGridView();
 
-            var areaList = areaRepository.GetAll().ToList();
+            var areaList = areaRepository.GetAll().Where(a => !a.IsDeleted).ToList();
             if (areaList is not null && areaList.Count > 0)
             {
                 cbArea.DataSource = areaList;
@@ -84,9 +84,52 @@ namespace Zoo.Management.WinformApp
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
+            try
+            {
+                btnUpdate.Enabled = false;
 
+                var id = CheckValidId();
+                if (id <= 0) return;
+
+                var cage = cageRepository.GetAll().Where(c => c.Id == id && !c.IsDeleted).FirstOrDefault();
+                if (cage is null)
+                {
+                    MessageBox.Show("Cage was not found. Can not update!");
+                    btnUpdate.Enabled = true;
+                    return;
+                }
+
+                var area = cbArea.SelectedItem as Area;
+                if (area is null)
+                {
+                    MessageBox.Show("Please choose area!", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnUpdate.Enabled = true;
+                    return;
+                };
+
+                cage.CageName = txtName.Text;
+                cage.AreaId = area.Id;
+
+                if (!CheckValidation(cage))
+                {
+                    btnUpdate.Enabled = true;
+                    return;
+                }
+                await cageRepository.UpdateAsync(cage);
+
+                GetDataForDataGridView();
+
+                ClearText();
+                btnCreate.Enabled = true;
+                btnDelete.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                btnUpdate.Enabled = true;
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -102,7 +145,7 @@ namespace Zoo.Management.WinformApp
 
         private void GetDataForDataGridView()
         {
-            var cageList = cageRepository.GetAll().Include(c => c.Area).ToList();
+            var cageList = cageRepository.GetAll().Where(c => !c.IsDeleted).Include(c => c.Area).ToList();
             if (cageList.Count > 0 && cageList is not null)
             {
                 dgvListCage.DataSource = cageList.Select(c => new
@@ -116,12 +159,15 @@ namespace Zoo.Management.WinformApp
 
         private int CheckValidId()
         {
-            // Check if the price is decimal
-            int id = -1;
-            if (!int.TryParse(txtId.Text, out id))
+            if (!int.TryParse(txtId.Text, out int id))
             {
-                MessageBox.Show("Price must be integer");
-                return id;
+                MessageBox.Show("Id must be integer");
+                return -1;
+            }
+            if (txtId.Text == "0")
+            {
+                MessageBox.Show("Id must be positive");
+                return 0;
             }
             return id;
         }
