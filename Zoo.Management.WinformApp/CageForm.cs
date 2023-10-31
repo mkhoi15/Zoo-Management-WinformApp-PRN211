@@ -16,18 +16,18 @@ namespace Zoo.Management.WinformApp
 {
     public partial class CageForm : Form
     {
-        private CageRepository cageRepository;
-        private AreaRepository areaRepository;
+        private readonly CageRepository _cageRepository;
+        private readonly AreaRepository _areaRepository;
 
         public CageForm()
         {
             InitializeComponent();
-            cageRepository = new CageRepository();
-            areaRepository = new AreaRepository();
+            _cageRepository = new CageRepository();
+            _areaRepository = new AreaRepository();
 
             GetDataForDataGridView();
 
-            var areaList = areaRepository.GetAll().Where(a => !a.IsDeleted).ToList();
+            var areaList = _areaRepository.GetAll().Where(a => !a.IsDeleted).ToList();
             if (areaList is not null && areaList.Count > 0)
             {
                 cbArea.DataSource = areaList;
@@ -70,7 +70,7 @@ namespace Zoo.Management.WinformApp
 
                 if (!CheckValidation(newCage)) return;
 
-                await cageRepository.AddAsync(newCage);
+                await _cageRepository.AddAsync(newCage);
                 GetDataForDataGridView();
             }
             catch (Exception ex)
@@ -93,7 +93,7 @@ namespace Zoo.Management.WinformApp
                 var id = CheckValidId();
                 if (id <= 0) return;
 
-                var cage = cageRepository.GetAll().Where(c => c.Id == id && !c.IsDeleted).FirstOrDefault();
+                var cage = _cageRepository.GetAll().Where(c => c.Id == id && !c.IsDeleted).FirstOrDefault();
                 if (cage is null)
                 {
                     MessageBox.Show("Cage is not found. Can not update!");
@@ -117,7 +117,7 @@ namespace Zoo.Management.WinformApp
                     btnUpdate.Enabled = true;
                     return;
                 }
-                await cageRepository.UpdateAsync(cage);
+                await _cageRepository.UpdateAsync(cage);
 
                 GetDataForDataGridView();
 
@@ -148,7 +148,7 @@ namespace Zoo.Management.WinformApp
 
                 if (cageName == "" && area is null)
                 {
-                    deleteCage = cageRepository.GetAll().Where(c => c.Id == id).FirstOrDefault();
+                    deleteCage = _cageRepository.GetAll().Where(c => c.Id == id).FirstOrDefault();
                 }
                 else
                 {
@@ -158,7 +158,7 @@ namespace Zoo.Management.WinformApp
                         btnDelete.Enabled = true;
                         return;
                     }
-                    deleteCage = cageRepository.GetAll().Where(c => c.Id == id
+                    deleteCage = _cageRepository.GetAll().Where(c => c.Id == id
                                                                 && c.CageName == cageName
                                                                 && c.AreaId == area.Id).FirstOrDefault();
                 }
@@ -178,7 +178,7 @@ namespace Zoo.Management.WinformApp
 
                 deleteCage.IsDeleted = true;
 
-                await cageRepository.UpdateAsync(deleteCage);
+                await _cageRepository.UpdateAsync(deleteCage);
 
                 GetDataForDataGridView();
 
@@ -201,7 +201,7 @@ namespace Zoo.Management.WinformApp
 
         private void GetDataForDataGridView()
         {
-            var cageList = cageRepository.GetAll().Where(c => !c.IsDeleted).Include(c => c.Area).ToList();
+            var cageList = _cageRepository.GetAll().Where(c => !c.IsDeleted).Include(c => c.Area).ToList();
             if (cageList.Count > 0 && cageList is not null)
             {
                 dgvListCage.DataSource = cageList.Select(c => new
