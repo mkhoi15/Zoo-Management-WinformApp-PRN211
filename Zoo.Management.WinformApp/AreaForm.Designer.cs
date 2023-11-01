@@ -37,6 +37,9 @@
             btnCreate = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
+            btnCurrentArea = new Button();
+            btnDeletedArea = new Button();
+            btnRecovery = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvArea).BeginInit();
             SuspendLayout();
             // 
@@ -122,11 +125,44 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
+            // btnCurrentArea
+            // 
+            btnCurrentArea.Location = new Point(614, 31);
+            btnCurrentArea.Name = "btnCurrentArea";
+            btnCurrentArea.Size = new Size(82, 23);
+            btnCurrentArea.TabIndex = 9;
+            btnCurrentArea.Text = "Current Area";
+            btnCurrentArea.UseVisualStyleBackColor = true;
+            btnCurrentArea.Click += btnCurrentArea_Click;
+            // 
+            // btnDeletedArea
+            // 
+            btnDeletedArea.Location = new Point(693, 31);
+            btnDeletedArea.Name = "btnDeletedArea";
+            btnDeletedArea.Size = new Size(82, 23);
+            btnDeletedArea.TabIndex = 10;
+            btnDeletedArea.Text = "Deleted Area";
+            btnDeletedArea.UseVisualStyleBackColor = true;
+            btnDeletedArea.Click += btnDeletedArea_Click;
+            // 
+            // btnRecovery
+            // 
+            btnRecovery.Location = new Point(225, 254);
+            btnRecovery.Name = "btnRecovery";
+            btnRecovery.Size = new Size(75, 23);
+            btnRecovery.TabIndex = 11;
+            btnRecovery.Text = "Recovery";
+            btnRecovery.UseVisualStyleBackColor = true;
+            btnRecovery.Click += btnRecovery_Click;
+            // 
             // AreaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRecovery);
+            Controls.Add(btnDeletedArea);
+            Controls.Add(btnCurrentArea);
             Controls.Add(btnUpdate);
             Controls.Add(btnDelete);
             Controls.Add(btnCreate);
@@ -154,5 +190,8 @@
         private Button btnCreate;
         private Button btnDelete;
         private Button btnUpdate;
+        private Button btnCurrentArea;
+        private Button btnDeletedArea;
+        private Button btnRecovery;
     }
 }
