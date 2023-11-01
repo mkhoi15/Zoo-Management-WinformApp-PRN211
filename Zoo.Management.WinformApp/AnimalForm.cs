@@ -31,9 +31,9 @@ namespace Zoo.Management.WinformApp
 
 			var cage = _cageRepository.GetAll();
 			var listCage = new List<Cage>();
-			
+
 			listCage = cage.ToList();
-			
+
 			listCage.Insert(0, new Cage { Id = 0, CageName = "Select Cage" });
 			cbCage.DataSource = listCage;
 			cbCage.DisplayMember = "CageName";
@@ -69,16 +69,16 @@ namespace Zoo.Management.WinformApp
 			var listAnimal = _animalRepository.GetAll().AsNoTracking()
 								.Where(a => a.IsDelete == false)
 								.Include(p => p.Cage)
-								.Select(a => new
-								{
-									Id = a.Id,
-									Name = a.AnimalName,
-									Species = a.Species,
-									Age = a.Age,
-									Cage = a.Cage.CageName
-								}).ToList();
+								.ToList();
 
-			dgvAnimal.DataSource = listAnimal;
+			dgvAnimal.DataSource = listAnimal.Select(a => new
+			{
+				Id = a.Id,
+				Name = a.AnimalName,
+				Species = a.Species,
+				Age = a.Age,
+				Cage = a.Cage?.CageName
+			}).ToList();
 		}
 
 		private void ShowListOfDeleteAnimal()
@@ -86,18 +86,18 @@ namespace Zoo.Management.WinformApp
 			var listAnimal = _animalRepository.GetAll().AsNoTracking()
 								.Where(a => a.IsDelete == true)
 								.Include(p => p.Cage)
-								.Select(a => new
-								{
-									Id = a.Id,
-									Name = a.AnimalName,
-									Species = a.Species,
-									Age = a.Age,
-									Cage = a.Cage.CageName
-								}).ToList();
+								.ToList();
 
 
-			dgvAnimal.DataSource = listAnimal;
-			
+			dgvAnimal.DataSource = listAnimal.Select(a => new
+			{
+				Id = a.Id,
+				Name = a.AnimalName,
+				Species = a.Species,
+				Age = a.Age,
+				Cage = a.Cage?.CageName
+			}).ToList();
+
 		}
 
 		private void ClearTextBox()
@@ -134,14 +134,20 @@ namespace Zoo.Management.WinformApp
 				return;
 			}
 
-			var cage = cbCage.SelectedItem as Cage;
+			Cage? cage = cbCage.SelectedItem as Cage;
+
+			if (cage == null)
+			{
+				MessageBox.Show("The cage can not be null!");
+				return;
+			}
 
 			Animal animal = new Animal()
 			{
 				AnimalName = animalName,
 				Species = animalSpecies,
 				Age = age,
-				
+
 				CageId = cage.Id
 			};
 
@@ -269,7 +275,7 @@ namespace Zoo.Management.WinformApp
 		private void Search(string searchString)
 		{
 			var listAnimal = _animalRepository.GetAll().AsNoTracking()
-								.Where(a => a.IsDelete == false && a.AnimalName.Contains(searchString))
+								.Where(a => a.AnimalName != null && a.IsDelete == false && a.AnimalName.Contains(searchString))
 								.Include(p => p.Cage)
 								.Select(a => new
 								{
@@ -278,10 +284,10 @@ namespace Zoo.Management.WinformApp
 									Age = a.Age,
 									Cage = a.Cage.CageName
 								}).ToList();
-			
+
 
 			dgvAnimal.DataSource = listAnimal;
-			
+
 		}
 
 		private void EmptyBoxes()
