@@ -351,6 +351,6 @@ namespace Zoo.Management.WinformApp
 			txtSearch.Text = String.Empty;
 			cbCage.Text = String.Empty;
 		}
-	
+
 	}
 }

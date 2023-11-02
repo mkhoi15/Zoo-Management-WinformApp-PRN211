@@ -1,197 +1,208 @@
 ﻿namespace Zoo.Management.WinformApp
 {
-    partial class AreaForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class AreaForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            dgvArea = new DataGridView();
-            lbArea = new Label();
-            lbId = new Label();
-            lbName = new Label();
-            txtId = new TextBox();
-            txtName = new TextBox();
-            btnCreate = new Button();
-            btnDelete = new Button();
-            btnUpdate = new Button();
-            btnCurrentArea = new Button();
-            btnDeletedArea = new Button();
-            btnRecovery = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvArea).BeginInit();
-            SuspendLayout();
-            // 
-            // dgvArea
-            // 
-            dgvArea.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvArea.Location = new Point(358, 50);
-            dgvArea.Name = "dgvArea";
-            dgvArea.RowTemplate.Height = 25;
-            dgvArea.Size = new Size(417, 285);
-            dgvArea.TabIndex = 0;
-            dgvArea.CellDoubleClick += dgvArea_CellDoubleClick;
-            // 
-            // lbArea
-            // 
-            lbArea.AutoSize = true;
-            lbArea.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbArea.Location = new Point(105, 9);
-            lbArea.Name = "lbArea";
-            lbArea.Size = new Size(112, 47);
-            lbArea.TabIndex = 1;
-            lbArea.Text = "AREA";
-            // 
-            // lbId
-            // 
-            lbId.AutoSize = true;
-            lbId.Location = new Point(72, 105);
-            lbId.Name = "lbId";
-            lbId.Size = new Size(17, 15);
-            lbId.TabIndex = 2;
-            lbId.Text = "Id";
-            // 
-            // lbName
-            // 
-            lbName.AutoSize = true;
-            lbName.Location = new Point(50, 149);
-            lbName.Name = "lbName";
-            lbName.Size = new Size(39, 15);
-            lbName.TabIndex = 3;
-            lbName.Text = "Name";
-            // 
-            // txtId
-            // 
-            txtId.Location = new Point(117, 97);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(100, 23);
-            txtId.TabIndex = 4;
-            // 
-            // txtName
-            // 
-            txtName.Location = new Point(117, 146);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(100, 23);
-            txtName.TabIndex = 5;
-            // 
-            // btnCreate
-            // 
-            btnCreate.Location = new Point(12, 204);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(75, 23);
-            btnCreate.TabIndex = 6;
-            btnCreate.Text = "Create";
-            btnCreate.UseVisualStyleBackColor = true;
-            btnCreate.Click += btnCreate_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(117, 204);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
-            btnDelete.TabIndex = 7;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Location = new Point(225, 206);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(75, 23);
-            btnUpdate.TabIndex = 8;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
-            // 
-            // btnCurrentArea
-            // 
-            btnCurrentArea.Location = new Point(614, 31);
-            btnCurrentArea.Name = "btnCurrentArea";
-            btnCurrentArea.Size = new Size(82, 23);
-            btnCurrentArea.TabIndex = 9;
-            btnCurrentArea.Text = "Current Area";
-            btnCurrentArea.UseVisualStyleBackColor = true;
-            btnCurrentArea.Click += btnCurrentArea_Click;
-            // 
-            // btnDeletedArea
-            // 
-            btnDeletedArea.Location = new Point(693, 31);
-            btnDeletedArea.Name = "btnDeletedArea";
-            btnDeletedArea.Size = new Size(82, 23);
-            btnDeletedArea.TabIndex = 10;
-            btnDeletedArea.Text = "Deleted Area";
-            btnDeletedArea.UseVisualStyleBackColor = true;
-            btnDeletedArea.Click += btnDeletedArea_Click;
-            // 
-            // btnRecovery
-            // 
-            btnRecovery.Location = new Point(225, 254);
-            btnRecovery.Name = "btnRecovery";
-            btnRecovery.Size = new Size(75, 23);
-            btnRecovery.TabIndex = 11;
-            btnRecovery.Text = "Recovery";
-            btnRecovery.UseVisualStyleBackColor = true;
-            btnRecovery.Click += btnRecovery_Click;
-            // 
-            // AreaForm
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnRecovery);
-            Controls.Add(btnDeletedArea);
-            Controls.Add(btnCurrentArea);
-            Controls.Add(btnUpdate);
-            Controls.Add(btnDelete);
-            Controls.Add(btnCreate);
-            Controls.Add(txtName);
-            Controls.Add(txtId);
-            Controls.Add(lbName);
-            Controls.Add(lbId);
-            Controls.Add(lbArea);
-            Controls.Add(dgvArea);
-            Name = "AreaForm";
-            Text = "AreaForm";
-            ((System.ComponentModel.ISupportInitialize)dgvArea).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
-        }
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			dgvArea = new DataGridView();
+			lbArea = new Label();
+			lbId = new Label();
+			lbName = new Label();
+			txtId = new TextBox();
+			txtName = new TextBox();
+			btnCreate = new Button();
+			btnDelete = new Button();
+			btnUpdate = new Button();
+			btnCurrentArea = new Button();
+			btnDeletedArea = new Button();
+			btnRecovery = new Button();
+			((System.ComponentModel.ISupportInitialize)dgvArea).BeginInit();
+			SuspendLayout();
+			// 
+			// dgvArea
+			// 
+			dgvArea.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvArea.Location = new Point(409, 67);
+			dgvArea.Margin = new Padding(3, 4, 3, 4);
+			dgvArea.Name = "dgvArea";
+			dgvArea.RowHeadersWidth = 51;
+			dgvArea.RowTemplate.Height = 25;
+			dgvArea.Size = new Size(477, 380);
+			dgvArea.TabIndex = 0;
+			dgvArea.CellDoubleClick += dgvArea_CellDoubleClick;
+			// 
+			// lbArea
+			// 
+			lbArea.AutoSize = true;
+			lbArea.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+			lbArea.Location = new Point(120, 12);
+			lbArea.Name = "lbArea";
+			lbArea.Size = new Size(140, 60);
+			lbArea.TabIndex = 1;
+			lbArea.Text = "AREA";
+			// 
+			// lbId
+			// 
+			lbId.AutoSize = true;
+			lbId.Location = new Point(82, 140);
+			lbId.Name = "lbId";
+			lbId.Size = new Size(22, 20);
+			lbId.TabIndex = 2;
+			lbId.Text = "Id";
+			// 
+			// lbName
+			// 
+			lbName.AutoSize = true;
+			lbName.Location = new Point(57, 199);
+			lbName.Name = "lbName";
+			lbName.Size = new Size(49, 20);
+			lbName.TabIndex = 3;
+			lbName.Text = "Name";
+			// 
+			// txtId
+			// 
+			txtId.Location = new Point(134, 129);
+			txtId.Margin = new Padding(3, 4, 3, 4);
+			txtId.Name = "txtId";
+			txtId.Size = new Size(114, 27);
+			txtId.TabIndex = 4;
+			// 
+			// txtName
+			// 
+			txtName.Location = new Point(134, 195);
+			txtName.Margin = new Padding(3, 4, 3, 4);
+			txtName.Name = "txtName";
+			txtName.Size = new Size(114, 27);
+			txtName.TabIndex = 5;
+			// 
+			// btnCreate
+			// 
+			btnCreate.Location = new Point(14, 272);
+			btnCreate.Margin = new Padding(3, 4, 3, 4);
+			btnCreate.Name = "btnCreate";
+			btnCreate.Size = new Size(86, 31);
+			btnCreate.TabIndex = 6;
+			btnCreate.Text = "Create";
+			btnCreate.UseVisualStyleBackColor = true;
+			btnCreate.Click += btnCreate_Click;
+			// 
+			// btnDelete
+			// 
+			btnDelete.Location = new Point(134, 272);
+			btnDelete.Margin = new Padding(3, 4, 3, 4);
+			btnDelete.Name = "btnDelete";
+			btnDelete.Size = new Size(86, 31);
+			btnDelete.TabIndex = 7;
+			btnDelete.Text = "Delete";
+			btnDelete.UseVisualStyleBackColor = true;
+			btnDelete.Click += btnDelete_Click;
+			// 
+			// btnUpdate
+			// 
+			btnUpdate.Location = new Point(257, 275);
+			btnUpdate.Margin = new Padding(3, 4, 3, 4);
+			btnUpdate.Name = "btnUpdate";
+			btnUpdate.Size = new Size(86, 31);
+			btnUpdate.TabIndex = 8;
+			btnUpdate.Text = "Update";
+			btnUpdate.UseVisualStyleBackColor = true;
+			btnUpdate.Click += btnUpdate_Click;
+			// 
+			// btnCurrentArea
+			// 
+			btnCurrentArea.Location = new Point(671, 28);
+			btnCurrentArea.Margin = new Padding(3, 4, 3, 4);
+			btnCurrentArea.Name = "btnCurrentArea";
+			btnCurrentArea.Size = new Size(94, 31);
+			btnCurrentArea.TabIndex = 9;
+			btnCurrentArea.Text = "Current Area";
+			btnCurrentArea.UseVisualStyleBackColor = true;
+			btnCurrentArea.Click += btnCurrentArea_Click;
+			// 
+			// btnDeletedArea
+			// 
+			btnDeletedArea.Location = new Point(792, 28);
+			btnDeletedArea.Margin = new Padding(3, 4, 3, 4);
+			btnDeletedArea.Name = "btnDeletedArea";
+			btnDeletedArea.Size = new Size(94, 31);
+			btnDeletedArea.TabIndex = 10;
+			btnDeletedArea.Text = "Deleted Area";
+			btnDeletedArea.UseVisualStyleBackColor = true;
+			btnDeletedArea.Click += btnDeletedArea_Click;
+			// 
+			// btnRecovery
+			// 
+			btnRecovery.Location = new Point(257, 339);
+			btnRecovery.Margin = new Padding(3, 4, 3, 4);
+			btnRecovery.Name = "btnRecovery";
+			btnRecovery.Size = new Size(86, 31);
+			btnRecovery.TabIndex = 11;
+			btnRecovery.Text = "Recovery";
+			btnRecovery.UseVisualStyleBackColor = true;
+			btnRecovery.Click += btnRecovery_Click;
+			// 
+			// AreaForm
+			// 
+			AutoScaleDimensions = new SizeF(8F, 20F);
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new Size(914, 600);
+			Controls.Add(btnRecovery);
+			Controls.Add(btnDeletedArea);
+			Controls.Add(btnCurrentArea);
+			Controls.Add(btnUpdate);
+			Controls.Add(btnDelete);
+			Controls.Add(btnCreate);
+			Controls.Add(txtName);
+			Controls.Add(txtId);
+			Controls.Add(lbName);
+			Controls.Add(lbId);
+			Controls.Add(lbArea);
+			Controls.Add(dgvArea);
+			Margin = new Padding(3, 4, 3, 4);
+			Name = "AreaForm";
+			Text = "AreaForm";
+			((System.ComponentModel.ISupportInitialize)dgvArea).EndInit();
+			ResumeLayout(false);
+			PerformLayout();
+		}
 
-        #endregion
+		#endregion
 
-        private DataGridView dgvArea;
-        private Label lbArea;
-        private Label lbId;
-        private Label lbName;
-        private TextBox txtId;
-        private TextBox txtName;
-        private Button btnCreate;
-        private Button btnDelete;
-        private Button btnUpdate;
-        private Button btnCurrentArea;
-        private Button btnDeletedArea;
-        private Button btnRecovery;
-    }
+		private DataGridView dgvArea;
+		private Label lbArea;
+		private Label lbId;
+		private Label lbName;
+		private TextBox txtId;
+		private TextBox txtName;
+		private Button btnCreate;
+		private Button btnDelete;
+		private Button btnUpdate;
+		private Button btnCurrentArea;
+		private Button btnDeletedArea;
+		private Button btnRecovery;
+	}
 }
