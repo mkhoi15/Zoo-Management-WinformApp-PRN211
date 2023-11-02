@@ -38,7 +38,11 @@ namespace Zoo.Management.WinformApp
 				UserForm userForm = new(user);
 				userForm.Show();
 				this.Hide();
+				return;
 			}
+
+			MessageBox.Show("You don't have permission to login!!");
+			BtnLogin.Enabled = true;
 		}
 	}
 }

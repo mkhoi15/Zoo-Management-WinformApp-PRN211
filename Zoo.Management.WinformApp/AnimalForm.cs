@@ -54,12 +54,6 @@ namespace Zoo.Management.WinformApp
 
 			var isValidAge = int.TryParse(txtAge.Text, out int age);
 
-			if(age < 0)
-			{
-				MessageBox.Show("Animal age must greater than 0");
-				btnCreate.Enabled = true;
-				return;
-			}
 
 			if (cbCage.SelectedItem == null)
 			{
@@ -81,7 +75,6 @@ namespace Zoo.Management.WinformApp
 				AnimalName = animalName,
 				Species = animalSpecies,
 				Age = age,
-
 				CageId = cage.Id
 			};
 
@@ -106,16 +99,15 @@ namespace Zoo.Management.WinformApp
 		private async void btnUpdate_Click(object sender, EventArgs e)
 		{
 			btnUpdate.Enabled = false;
-			var id = txtID.Text;
+			var id = int.Parse(txtID.Text);
 			var animalName = txtAnimalName.Text;
 			var animalSpecies = txtSpecies.Text;
 
 			var isValidAge = int.TryParse(txtAge.Text, out int age);
-
-			if (age < 0)
+			var animalUpdate = await _animalRepository.GetByIdAsync(id);
+			if (animalUpdate is null)
 			{
-				btnUpdate.Enabled = true;
-				MessageBox.Show("Invalid Age");
+				MessageBox.Show("The animal does not exist!!");
 				return;
 			}
 
@@ -126,19 +118,15 @@ namespace Zoo.Management.WinformApp
 				return;
 			}
 
-			var cage = cbCage.SelectedItem as Cage;
+			Cage cage = (Cage) cbCage.SelectedItem;
 
-			Animal animal = new Animal()
-			{
-				Id = int.Parse(id),
-				AnimalName = animalName,
-				Species = animalSpecies,
-				Age = age,
-				CageId = cage.Id
-			};
+			animalUpdate.CageId = cage.Id;
+			animalUpdate.Age = age;
+			animalUpdate.Species = animalSpecies;
+			animalUpdate.AnimalName = animalName;
 
 			AnimalValidationHelper validator = new();
-			var result = validator.Validate(animal);
+			var result = validator.Validate(animalUpdate);
 
 			if (!result.IsValid)
 			{
@@ -148,7 +136,9 @@ namespace Zoo.Management.WinformApp
 				return;
 			}
 
-			await _animalRepository.UpdateAsync(animal);
+			await _animalRepository.UpdateAsync(animalUpdate);
+
+			MessageBox.Show("Updated");
 
 			this.ShowListOfAnimal();
 			btnUpdate.Enabled = false;
