@@ -48,6 +48,7 @@
 			btnDeletedAnimal = new Button();
 			btnCurrentAnimal = new Button();
 			btnRecovery = new Button();
+			btnClear = new Button();
 			((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
 			SuspendLayout();
 			// 
@@ -238,11 +239,22 @@
 			btnRecovery.Visible = false;
 			btnRecovery.Click += btnRecovery_Click;
 			// 
+			// btnClear
+			// 
+			btnClear.Location = new Point(37, 586);
+			btnClear.Name = "btnClear";
+			btnClear.Size = new Size(94, 29);
+			btnClear.TabIndex = 29;
+			btnClear.Text = "Clear";
+			btnClear.UseVisualStyleBackColor = true;
+			btnClear.Click += btnClear_Click;
+			// 
 			// AnimalForm
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(1525, 697);
+			Controls.Add(btnClear);
 			Controls.Add(btnRecovery);
 			Controls.Add(btnCurrentAnimal);
 			Controls.Add(btnDeletedAnimal);
@@ -292,5 +304,6 @@
 		private Button btnDeletedAnimal;
 		private Button btnCurrentAnimal;
 		private Button btnRecovery;
+		private Button btnClear;
 	}
 }

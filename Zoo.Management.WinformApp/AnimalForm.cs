@@ -118,7 +118,7 @@ namespace Zoo.Management.WinformApp
 				return;
 			}
 
-			Cage cage = (Cage) cbCage.SelectedItem;
+			Cage cage = (Cage)cbCage.SelectedItem;
 
 			animalUpdate.CageId = cage.Id;
 			animalUpdate.Age = age;
@@ -266,22 +266,22 @@ namespace Zoo.Management.WinformApp
 		}
 
 		private void Search(string searchString)
-		{	
+		{
 
-			if(btnRecovery.Visible == false)
+			if (btnRecovery.Visible == false)
 			{
-				 _animals = _animalRepository.GetAll().
-									Where(a => a.IsDelete == false
-									&& a.AnimalName.Contains(searchString))
-									.Include (p => p.Cage)
-									.AsNoTracking().ToList();
+				_animals = _animalRepository.GetAll().
+								   Where(a => a.IsDelete == false
+								   && a.AnimalName.Contains(searchString))
+								   .Include(p => p.Cage)
+								   .AsNoTracking().ToList();
 			}
 			if (btnRecovery.Visible == true)
 			{
 				_animals = _animalRepository.GetAll().
 									Where(a => a.IsDelete == true
 									&& a.AnimalName.Contains(searchString))
-									.Include (p => p.Cage)
+									.Include(p => p.Cage)
 									.AsNoTracking().ToList();
 			}
 
@@ -373,5 +373,12 @@ namespace Zoo.Management.WinformApp
 			cbCage.Text = String.Empty;
 		}
 
+		private void btnClear_Click(object sender, EventArgs e)
+		{
+			ClearTextBox();
+			btnCreate.Enabled = true;
+			btnDelete.Enabled = false;
+			btnUpdate.Enabled = false;
+		}
 	}
 }
