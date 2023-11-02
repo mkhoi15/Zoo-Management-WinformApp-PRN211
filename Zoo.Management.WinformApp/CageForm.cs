@@ -38,9 +38,22 @@ namespace Zoo.Management.WinformApp
 
         private void dgvListCage_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-            btnCreate.Enabled = false;
+            if (btnDeletedCages.Enabled)
+            {
+                btnUpdate.Enabled = true;
+                btnDelete.Enabled = true;
+                btnClear.Enabled = true;
+                btnCreate.Enabled = false;
+                btnRecover.Enabled = false;
+            }
+            else
+            {
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
+                btnClear.Enabled = false;
+                btnCreate.Enabled = false;
+                btnRecover.Enabled = true;
+            }
 
             var row = dgvListCage.Rows[e.RowIndex];
             txtId.Text = row.Cells[0].Value.ToString();
@@ -189,7 +202,113 @@ namespace Zoo.Management.WinformApp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                btnDelete.Enabled = true; 
+                btnDelete.Enabled = true;
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            btnClear.Enabled = false;
+
+            ClearText();
+
+            btnClear.Enabled = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+        }
+
+        private void btnCurrentCages_Click(object sender, EventArgs e)
+        {
+            disableReadOnlyForAll();
+            ClearText();
+
+            btnCreate.Enabled = true;
+            btnClear.Enabled = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnRecover.Enabled = false;
+
+            btnDeletedCages.Enabled = true;
+            btnCurrentCages.Enabled = false;
+
+            GetDataForDataGridView();
+        }
+
+        private void btnDeletedCages_Click(object sender, EventArgs e)
+        {
+            ClearText();
+
+            btnRecover.Enabled = false;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnCreate.Enabled = false;
+            btnClear.Enabled = false;
+
+            btnDeletedCages.Enabled = false;
+            btnCurrentCages.Enabled = true;
+
+            setReadOnlyForAll();
+
+            var cageList = _cageRepository.GetAll().Where(c => c.IsDeleted).Include(c => c.Area).ToList();
+            if (cageList.Count > 0 && cageList is not null)
+            {
+                dgvListCage.DataSource = cageList.Select(c => new
+                {
+                    id = c.Id,
+                    Name = c.CageName,
+                    Area = c.Area?.Name,
+                }).ToList();
+            }
+        }
+
+        private async void btnRecover_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btnRecover.Enabled = false;
+
+                var id = CheckValidId();
+                if (id <= 0) return;
+
+                var cage = _cageRepository.GetAll().Where(c => c.Id == id).FirstOrDefault();
+                if (cage is null)
+                {
+                    MessageBox.Show("Cage is not found. Can not recover!");
+                    return;
+                }
+                if (!cage.IsDeleted)
+                {
+                    MessageBox.Show("Cage is recovered. Can not recover!");
+                    return;
+                }
+
+                cage.IsDeleted = false;
+
+                if (!CheckValidation(cage))
+                {
+                    return;
+                }
+                await _cageRepository.UpdateAsync(cage);
+
+                GetDataForDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ClearText();
+                btnCreate.Enabled = true;
+                btnClear.Enabled = true;
+                btnCurrentCages.Enabled = true;
+                btnDeletedCages.Enabled = false;
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+
+                btnCurrentCages.Enabled = false;
+                btnDeletedCages.Enabled = true;
+                disableReadOnlyForAll();
             }
         }
 
@@ -240,6 +359,19 @@ namespace Zoo.Management.WinformApp
                 return false;
             }
             return true;
+        }
+
+        private void setReadOnlyForAll()
+        {
+            txtId.ReadOnly = true;
+            txtName.ReadOnly = true;
+            cbArea.Enabled = false;
+        }
+
+        private void disableReadOnlyForAll()
+        {
+            txtName.ReadOnly = false;
+            cbArea.Enabled = true;
         }
     }
 }

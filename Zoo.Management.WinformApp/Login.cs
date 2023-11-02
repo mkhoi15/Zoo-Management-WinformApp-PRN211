@@ -14,7 +14,7 @@ namespace Zoo.Management.WinformApp
 			_userRepository = new UserRepository();
 			InitializeComponent();
 		}
-		
+
 		private async void BtnLogin_Click(object sender, EventArgs e)
 		{
 			BtnLogin.Enabled = false;
@@ -33,9 +33,9 @@ namespace Zoo.Management.WinformApp
 				return;
 			}
 
-			if (user.Role == "Admin") 
+			if (user.Role == "Admin")
 			{
-				UserForm userForm = new (user);
+				UserForm userForm = new(user);
 				userForm.Show();
 				this.Hide();
 			}
