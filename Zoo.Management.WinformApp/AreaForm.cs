@@ -208,5 +208,83 @@ namespace Zoo.Management.WinformApp
                 btnDelete.Enabled = true;
             }
         }
+
+        private void btnCurrentArea_Click(object sender, EventArgs e)
+        {
+            btnDeletedArea.Enabled = true;
+            btnCurrentArea.Enabled = false;
+
+            btnCreate.Enabled = true;
+
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            GetDataForDataGridView();
+        }
+        private Area GetCurrentArea()
+        {
+            var id = txtId.Text;
+
+
+            var currentArea = new Area()
+            {
+                Id = int.Parse(id),
+                IsDeleted = false
+            };
+            return currentArea;
+        }
+        private async void btnRecovery_Click(object sender, EventArgs e)
+        {
+            var area = GetCurrentArea();
+            var isRecovered = await _areaRepository.RecoveryUserAsync(area);
+            EmptyBoxes();
+            if (isRecovered)
+            {
+                MessageBox.Show("Recovered");
+            }
+            else
+            {
+                MessageBox.Show("Recover failed!");
+            }
+            btnCreate.Enabled = true;
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            btnDeletedArea.Enabled = true;
+            btnCurrentArea.Enabled = false;
+            GetDataForDataGridView();
+
+        }
+        private void EmptyBoxes()
+        {
+            txtId.Text = String.Empty;
+            txtName.Text = String.Empty;
+        }
+        private void ShowListOfDeletedArea()
+        {
+            var listArea = _areaRepository.GetAll().AsNoTracking()
+                                .Where(a => a.IsDeleted == true)
+                                .Select(a => new
+                                {
+                                    Id = a.Id,
+                                    Name = a.Name
+                                }).ToList();
+
+
+            dgvArea.DataSource = listArea;
+
+        }
+
+        private void btnDeletedArea_Click(object sender, EventArgs e)
+        {
+            btnCurrentArea.Enabled = true;
+            btnDeletedArea.Enabled = false;
+
+            btnDelete.Enabled = false;
+            btnCreate.Enabled = false;
+            btnUpdate.Enabled = false;
+
+            btnRecovery.Enabled = true;
+            btnRecovery.Visible = true;
+            ShowListOfDeletedArea();
+        }
     }
 }
