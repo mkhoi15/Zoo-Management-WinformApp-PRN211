@@ -19,6 +19,7 @@ namespace Zoo.Management.WinformApp
 	{
 		private readonly AnimalRepository _animalRepository;
 		private readonly CageRepository _cageRepository;
+		private List<Animal> _animals = new List<Animal>();
 		public AnimalForm()
 		{
 			_animalRepository = new AnimalRepository();
@@ -203,7 +204,7 @@ namespace Zoo.Management.WinformApp
 			txtAnimalName.Text = data[1].Value.ToString();
 			txtSpecies.Text = data[2].Value.ToString();
 			txtAge.Text = data[3].Value.ToString();
-			cbCage.SelectedItem = data[4].Value.ToString();
+			cbCage.Text = data[4].Value.ToString();
 		}
 
 		private void btnSearch_Click(object sender, EventArgs e)
@@ -218,7 +219,7 @@ namespace Zoo.Management.WinformApp
 			btnDeletedAnimal.Enabled = true;
 			btnCurrentAnimal.Enabled = false;
 
-			btnCreate.Enabled = false;
+			btnCreate.Enabled = true;
 
 			btnCreate.Visible = true;
 			btnUpdate.Visible = true;
@@ -266,20 +267,33 @@ namespace Zoo.Management.WinformApp
 		}
 
 		private void Search(string searchString)
-		{
-			var listAnimal = _animalRepository.GetAll().AsNoTracking()
-								.Where(a => a.AnimalName != null && a.IsDelete == false && a.AnimalName.Contains(searchString))
-								.Include(p => p.Cage)
-								.Select(a => new
-								{
-									Name = a.AnimalName,
-									Species = a.Species,
-									Age = a.Age,
-									Cage = a.Cage.CageName
-								}).ToList();
+		{	
 
+			if(btnRecovery.Visible == false)
+			{
+				 _animals = _animalRepository.GetAll().
+									Where(a => a.IsDelete == false
+									&& a.AnimalName.Contains(searchString))
+									.Include (p => p.Cage)
+									.AsNoTracking().ToList();
+			}
+			if (btnRecovery.Visible == true)
+			{
+				_animals = _animalRepository.GetAll().
+									Where(a => a.IsDelete == true
+									&& a.AnimalName.Contains(searchString))
+									.Include (p => p.Cage)
+									.AsNoTracking().ToList();
+			}
 
-			dgvAnimal.DataSource = listAnimal;
+			dgvAnimal.DataSource = _animals.Select(a => new
+			{
+				Id = a.Id,
+				Name = a.AnimalName,
+				Species = a.Species,
+				Age = a.Age,
+				Cage = a.Cage.CageName
+			}).ToList();
 
 		}
 
