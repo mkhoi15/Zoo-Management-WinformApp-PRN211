@@ -303,15 +303,20 @@ namespace Zoo.Management.WinformApp
 		{
 			StripMenuHelper.Exist(this);
 		}
+		private void cagesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			StripMenuHelper.ShowCageForm();
+		}
 
 		private void animalStatusToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var isExist = MessageBox.Show("Do you want to exist?","",MessageBoxButtons.YesNo).ToString();
-			if(isExist == "Yes")
+			var isExist = MessageBox.Show("Do you want to exit?", "", MessageBoxButtons.YesNo).ToString();
+			if (isExist == "Yes")
 			{
 				this.Close();
 			}
 		}
+
 	}
 
 }

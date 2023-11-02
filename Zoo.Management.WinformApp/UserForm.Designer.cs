@@ -54,6 +54,7 @@
 			staffToolStripMenuItem = new ToolStripMenuItem();
 			areasCagesToolStripMenuItem = new ToolStripMenuItem();
 			animalToolStripMenuItem1 = new ToolStripMenuItem();
+			cagesToolStripMenuItem = new ToolStripMenuItem();
 			zooTrainerToolStripMenuItem = new ToolStripMenuItem();
 			animalToolStripMenuItem = new ToolStripMenuItem();
 			animalStatusToolStripMenuItem = new ToolStripMenuItem();
@@ -295,7 +296,7 @@
 			// 
 			// staffToolStripMenuItem
 			// 
-			staffToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { areasCagesToolStripMenuItem, animalToolStripMenuItem1 });
+			staffToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { areasCagesToolStripMenuItem, animalToolStripMenuItem1, cagesToolStripMenuItem });
 			staffToolStripMenuItem.Name = "staffToolStripMenuItem";
 			staffToolStripMenuItem.Size = new Size(100, 24);
 			staffToolStripMenuItem.Text = "Dash Board";
@@ -303,23 +304,30 @@
 			// areasCagesToolStripMenuItem
 			// 
 			areasCagesToolStripMenuItem.Name = "areasCagesToolStripMenuItem";
-			areasCagesToolStripMenuItem.Size = new Size(175, 26);
-			areasCagesToolStripMenuItem.Text = "Areas/Cages";
+			areasCagesToolStripMenuItem.Size = new Size(224, 26);
+			areasCagesToolStripMenuItem.Text = "Areas";
 			areasCagesToolStripMenuItem.Click += areasCagesToolStripMenuItem_Click;
 			// 
 			// animalToolStripMenuItem1
 			// 
 			animalToolStripMenuItem1.Name = "animalToolStripMenuItem1";
-			animalToolStripMenuItem1.Size = new Size(175, 26);
-			animalToolStripMenuItem1.Text = "Animal";
+			animalToolStripMenuItem1.Size = new Size(224, 26);
+			animalToolStripMenuItem1.Text = "Animals";
 			animalToolStripMenuItem1.Click += animalToolStripMenuItem1_Click;
+			// 
+			// cagesToolStripMenuItem
+			// 
+			cagesToolStripMenuItem.Name = "cagesToolStripMenuItem";
+			cagesToolStripMenuItem.Size = new Size(224, 26);
+			cagesToolStripMenuItem.Text = "Cages";
+			cagesToolStripMenuItem.Click += cagesToolStripMenuItem_Click;
 			// 
 			// zooTrainerToolStripMenuItem
 			// 
 			zooTrainerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { animalToolStripMenuItem, animalStatusToolStripMenuItem });
 			zooTrainerToolStripMenuItem.Name = "zooTrainerToolStripMenuItem";
-			zooTrainerToolStripMenuItem.Size = new Size(106, 24);
-			zooTrainerToolStripMenuItem.Text = "Logout/Exist";
+			zooTrainerToolStripMenuItem.Size = new Size(100, 24);
+			zooTrainerToolStripMenuItem.Text = "Logout/Exit";
 			// 
 			// animalToolStripMenuItem
 			// 
@@ -495,5 +503,6 @@
 		private Button btnDeletedList;
 		private Button btnCurrentList;
 		private Button btnClear;
+		private ToolStripMenuItem cagesToolStripMenuItem;
 	}
 }
