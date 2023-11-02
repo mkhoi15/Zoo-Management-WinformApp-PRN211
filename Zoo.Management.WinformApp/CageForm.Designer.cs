@@ -160,6 +160,7 @@
             // 
             // btnCurrentCages
             // 
+            btnCurrentCages.Enabled = false;
             btnCurrentCages.Location = new Point(586, 37);
             btnCurrentCages.Name = "btnCurrentCages";
             btnCurrentCages.Size = new Size(98, 23);
@@ -180,6 +181,7 @@
             // 
             // btnRecover
             // 
+            btnRecover.Enabled = false;
             btnRecover.Location = new Point(129, 229);
             btnRecover.Name = "btnRecover";
             btnRecover.Size = new Size(75, 23);
