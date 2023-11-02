@@ -219,6 +219,7 @@ namespace Zoo.Management.WinformApp
 
 			btnRecovery.Enabled = false;
 			btnRecovery.Visible = false;
+			btnClear.Visible = true;
 			ShowListOfAnimal();
 		}
 
@@ -234,6 +235,7 @@ namespace Zoo.Management.WinformApp
 
 			btnRecovery.Enabled = false;
 			btnRecovery.Visible = true;
+			btnClear.Visible = false;
 			ShowListOfDeleteAnimal();
 		}
 
