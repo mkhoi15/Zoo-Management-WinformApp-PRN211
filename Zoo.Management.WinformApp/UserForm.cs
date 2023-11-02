@@ -3,6 +3,7 @@ using Repositories;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Entities.Helper;
+using System.Text.RegularExpressions;
 
 namespace Zoo.Management.WinformApp
 {
@@ -128,13 +129,13 @@ namespace Zoo.Management.WinformApp
 			var password = txtPassword.Text;
 			var fullName = txtFullName.Text;
 			var email = txtEmail.Text;
-			var isValidPhoneNumber = int.TryParse(txtPhoneNumber.Text, out int phone);
+			var phone = txtPhoneNumber.Text;
+			var isValidPhoneNumber = Regex.IsMatch(txtPhoneNumber.Text, @"^\d+$");
 			if (!isValidPhoneNumber)
 			{
 				MessageBox.Show("Phone number is not valid!!");
 				return;
 			}
-			var phoneNumber = phone.ToString();
 
 			var gender = cbGender.Text;
 			var role = cbRole.Text;
@@ -146,7 +147,7 @@ namespace Zoo.Management.WinformApp
 				Password = password,
 				FullName = fullName,
 				Email = email,
-				PhoneNumber = phoneNumber,
+				PhoneNumber = phone,
 				Gender = gender,
 				Role = role,
 				Dob = dob,
@@ -168,11 +169,43 @@ namespace Zoo.Management.WinformApp
 
 		private async void btnUpdate_Click(object sender, EventArgs e)
 		{
-			var user = GetCurrentUser();
+			var user = await _resipotory.GetByIdAsync(int.Parse(txtId.Text));
+			if (user is null)
+			{
+				MessageBox.Show("The user is not exist!!");
+				return;
+			}
+			var isValidPhoneNumber = Regex.IsMatch(txtPhoneNumber.Text, @"^\d+$");
+			if (!isValidPhoneNumber)
+			{
+				MessageBox.Show("Phone number is not valid!!");
+				return;
+			}
+			user.UserName = txtUserName.Text;
+			user.Password = txtPassword.Text;
+			user.Dob = dtpDateOfBirth.Value;
+			user.PhoneNumber = txtPhoneNumber.Text;
+			user.Gender = cbGender.Text;
+			user.Role = cbRole.Text;
+			user.Email = txtEmail.Text;
+			user.FullName = txtFullName.Text;
+
+			ApplicationUserValidationHelper validator = new();
+			var result = validator.Validate(user);
+
+			if (!result.IsValid)
+			{
+				var errorsMessage = result.ToString("\n");
+				MessageBox.Show(errorsMessage);
+				return;
+			}
+
 			await _resipotory.UpdateAsync(user);
 			EmptyBoxes();
 			MessageBox.Show("Updated");
 			btnCreate.Enabled = true;
+			btnUpdate.Enabled = false;
+			btnDelete.Enabled = false;
 			ShowListUser();
 		}
 
@@ -202,6 +235,7 @@ namespace Zoo.Management.WinformApp
 			EmptyBoxes();
 			btnCreate.Enabled = true;
 			btnDelete.Enabled = false;
+			btnUpdate.Enabled = false;
 			ShowListUser();
 		}
 

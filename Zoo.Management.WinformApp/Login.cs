@@ -39,6 +39,9 @@ namespace Zoo.Management.WinformApp
 				userForm.Show();
 				this.Hide();
 			}
+
+			MessageBox.Show("You don't have permission to login!!");
+			BtnLogin.Enabled = true;
 		}
 	}
 }
