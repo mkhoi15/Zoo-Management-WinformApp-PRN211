@@ -54,12 +54,6 @@ namespace Zoo.Management.WinformApp
 
 			var isValidAge = int.TryParse(txtAge.Text, out int age);
 
-			if(age < 0)
-			{
-				MessageBox.Show("Animal age must greater than 0");
-				btnCreate.Enabled = true;
-				return;
-			}
 
 			if (cbCage.SelectedItem == null)
 			{
@@ -111,13 +105,6 @@ namespace Zoo.Management.WinformApp
 			var animalSpecies = txtSpecies.Text;
 
 			var isValidAge = int.TryParse(txtAge.Text, out int age);
-
-			if (age < 0)
-			{
-				btnUpdate.Enabled = true;
-				MessageBox.Show("Invalid Age");
-				return;
-			}
 
 			if (cbCage.SelectedItem == null)
 			{
