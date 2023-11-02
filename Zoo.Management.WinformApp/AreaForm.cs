@@ -29,16 +29,20 @@ namespace Zoo.Management.WinformApp
 			GetDataForDataGridView();
 
             txtId.ReadOnly = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnCurrentArea.Enabled = false;
 
-		}
+        }
 
 		private void dgvArea_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			btnUpdate.Enabled = true;
-			btnDelete.Enabled = true;
-			btnCreate.Enabled = false;
+            btnCreate.Enabled = false;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            btnRecovery.Enabled = true;
 
-			var row = dgvArea.Rows[e.RowIndex];
+            var row = dgvArea.Rows[e.RowIndex];
 			txtId.Text = row.Cells[0].Value.ToString();
 			txtName.Text = row.Cells[1].Value.ToString();
 
@@ -213,14 +217,18 @@ namespace Zoo.Management.WinformApp
 
 		private void btnCurrentArea_Click(object sender, EventArgs e)
 		{
-			btnDeletedArea.Enabled = true;
-			btnCurrentArea.Enabled = false;
+            btnDeletedArea.Enabled = true;
+            btnCurrentArea.Enabled = false;
 
-			btnCreate.Enabled = true;
+            btnCreate.Enabled = true;
 
-			btnRecovery.Enabled = false;
-			btnRecovery.Visible = false;
-			GetDataForDataGridView();
+            btnCreate.Visible = true;
+            btnUpdate.Visible = true;
+            btnDelete.Visible = true;
+
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            GetDataForDataGridView();
 		}
 		private Area GetCurrentArea()
 		{
@@ -247,12 +255,12 @@ namespace Zoo.Management.WinformApp
 			{
 				MessageBox.Show("Recover failed!");
 			}
-			btnCreate.Enabled = true;
-			btnRecovery.Enabled = false;
-			btnRecovery.Visible = false;
-			btnDeletedArea.Enabled = true;
-			btnCurrentArea.Enabled = false;
-			GetDataForDataGridView();
+            btnCreate.Enabled = true;
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = false;
+            btnDeletedArea.Enabled = true;
+            btnCurrentArea.Enabled = false;
+            GetDataForDataGridView();
 
 		}
 		private void EmptyBoxes()
@@ -277,16 +285,16 @@ namespace Zoo.Management.WinformApp
 
 		private void btnDeletedArea_Click(object sender, EventArgs e)
 		{
-			btnCurrentArea.Enabled = true;
-			btnDeletedArea.Enabled = false;
+            btnCurrentArea.Enabled = true;
+            btnDeletedArea.Enabled = false;
 
-			btnDelete.Enabled = false;
-			btnCreate.Enabled = false;
-			btnUpdate.Enabled = false;
+            btnCreate.Visible = false;
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
 
-			btnRecovery.Enabled = true;
-			btnRecovery.Visible = true;
-			ShowListOfDeletedArea();
+            btnRecovery.Enabled = false;
+            btnRecovery.Visible = true;
+            ShowListOfDeletedArea();
 		}
 	}
 }
