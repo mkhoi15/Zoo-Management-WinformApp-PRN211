@@ -39,6 +39,10 @@
             btnCreate = new Button();
             btnUpdate = new Button();
             btnDelete = new Button();
+            btnClear = new Button();
+            btnCurrentCages = new Button();
+            btnDeletedCages = new Button();
+            btnRecover = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvListCage).BeginInit();
             SuspendLayout();
             // 
@@ -105,10 +109,10 @@
             // dgvListCage
             // 
             dgvListCage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvListCage.Location = new Point(339, 27);
+            dgvListCage.Location = new Point(339, 66);
             dgvListCage.Name = "dgvListCage";
             dgvListCage.RowTemplate.Height = 25;
-            dgvListCage.Size = new Size(449, 376);
+            dgvListCage.Size = new Size(449, 337);
             dgvListCage.TabIndex = 7;
             dgvListCage.CellDoubleClick += dgvListCage_CellDoubleClick;
             // 
@@ -144,11 +148,57 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(48, 229);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(75, 23);
+            btnClear.TabIndex = 11;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
+            // 
+            // btnCurrentCages
+            // 
+            btnCurrentCages.Enabled = false;
+            btnCurrentCages.Location = new Point(586, 37);
+            btnCurrentCages.Name = "btnCurrentCages";
+            btnCurrentCages.Size = new Size(98, 23);
+            btnCurrentCages.TabIndex = 12;
+            btnCurrentCages.Text = "Current Cages";
+            btnCurrentCages.UseVisualStyleBackColor = true;
+            btnCurrentCages.Click += btnCurrentCages_Click;
+            // 
+            // btnDeletedCages
+            // 
+            btnDeletedCages.Location = new Point(690, 37);
+            btnDeletedCages.Name = "btnDeletedCages";
+            btnDeletedCages.Size = new Size(98, 23);
+            btnDeletedCages.TabIndex = 13;
+            btnDeletedCages.Text = "Deleted Cages";
+            btnDeletedCages.UseVisualStyleBackColor = true;
+            btnDeletedCages.Click += btnDeletedCages_Click;
+            // 
+            // btnRecover
+            // 
+            btnRecover.Enabled = false;
+            btnRecover.Location = new Point(129, 229);
+            btnRecover.Name = "btnRecover";
+            btnRecover.Size = new Size(75, 23);
+            btnRecover.TabIndex = 14;
+            btnRecover.Text = "Recover";
+            btnRecover.UseVisualStyleBackColor = true;
+            btnRecover.Click += btnRecover_Click;
+            // 
             // CageForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnRecover);
+            Controls.Add(btnDeletedCages);
+            Controls.Add(btnCurrentCages);
+            Controls.Add(btnClear);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
             Controls.Add(btnCreate);
@@ -180,5 +230,9 @@
         private Button btnCreate;
         private Button btnUpdate;
         private Button btnDelete;
+        private Button btnClear;
+        private Button btnCurrentCages;
+        private Button btnDeletedCages;
+        private Button btnRecover;
     }
 }
