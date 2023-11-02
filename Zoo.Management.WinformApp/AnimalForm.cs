@@ -255,6 +255,13 @@ namespace Zoo.Management.WinformApp
 			btnRecovery.Visible = false;
 			btnDeletedAnimal.Enabled = true;
 			btnCurrentAnimal.Enabled = false;
+
+			btnCreate.Visible = true;
+			btnUpdate.Visible = true;
+			btnDelete.Visible = true;
+			btnUpdate.Enabled = false;
+			btnDelete.Enabled = false;
+
 			ShowListOfAnimal();
 		}
 
