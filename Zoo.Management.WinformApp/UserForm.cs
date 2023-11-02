@@ -188,7 +188,7 @@ namespace Zoo.Management.WinformApp
                 MessageBox.Show("Phone number is not valid!!");
                 return;
 			}
-            var hadUser = _resipotory.GetAll().Where(e => e.UserName == txtUserName.Text).FirstOrDefault();
+            var hadUser = _resipotory.GetAll().Where(e => e.UserName == txtUserName.Text && e.Id != int.Parse(txtId.Text)).FirstOrDefault();
             if (hadUser != null)
             {
                 MessageBox.Show("UserName is already exist!!");

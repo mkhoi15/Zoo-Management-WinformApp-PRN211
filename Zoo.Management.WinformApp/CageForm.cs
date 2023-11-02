@@ -38,27 +38,34 @@ namespace Zoo.Management.WinformApp
 
         private void dgvListCage_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (btnDeletedCages.Enabled)
+            try
             {
-                btnUpdate.Enabled = true;
-                btnDelete.Enabled = true;
-                btnClear.Enabled = true;
-                btnCreate.Enabled = false;
-                btnRecover.Enabled = false;
-            }
-            else
-            {
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-                btnClear.Enabled = false;
-                btnCreate.Enabled = false;
-                btnRecover.Enabled = true;
-            }
+                if (btnDeletedCages.Enabled)
+                {
+                    btnUpdate.Enabled = true;
+                    btnDelete.Enabled = true;
+                    btnClear.Enabled = true;
+                    btnCreate.Enabled = false;
+                    btnRecover.Enabled = false;
+                }
+                else
+                {
+                    btnUpdate.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnClear.Enabled = false;
+                    btnCreate.Enabled = false;
+                    btnRecover.Enabled = true;
+                }
 
-            var row = dgvListCage.Rows[e.RowIndex];
-            txtId.Text = row.Cells[0].Value.ToString();
-            txtName.Text = row.Cells[1].Value.ToString();
-            cbArea.Text = row.Cells[2].Value.ToString();
+                var row = dgvListCage.Rows[e.RowIndex];
+                txtId.Text = row.Cells[0].Value.ToString();
+                txtName.Text = row.Cells[1].Value.ToString();
+                cbArea.Text = row.Cells[2].Value.ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void btnCreate_Click(object sender, EventArgs e)
