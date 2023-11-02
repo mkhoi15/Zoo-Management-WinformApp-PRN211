@@ -96,12 +96,19 @@ namespace Zoo.Management.WinformApp
 		private async void btnCreate_Click(object sender, EventArgs e)
 		{
 			btnCreate.Enabled = false;
+
 			try
 			{
-				var areaName = txtName.Text;
+                var hadArea = _areaRepository.GetAll().Where(e => e.Name.Equals(txtName.Text)).FirstOrDefault();
+                if (hadArea != null)
+                {
+                    MessageBox.Show("Area already exist!", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                var areaName = txtName.Text;
+               
 
-
-				var newArea = new Area()
+                var newArea = new Area()
 				{
 					Name = areaName,
 				};
@@ -128,7 +135,13 @@ namespace Zoo.Management.WinformApp
 				btnUpdate.Enabled = false;
 
 				var id = CheckValidId();
-				if (id <= 0) return;
+                var hadArea = _areaRepository.GetAll().Where(e => e.Name.Equals(txtName.Text)).FirstOrDefault();
+                if (hadArea != null)
+                {
+                    MessageBox.Show("Area already exist!", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (id <= 0) return;
 
 				var area = _areaRepository.GetAll().Where(c => c.Id == id && !c.IsDeleted).FirstOrDefault();
 				if (area is null)
