@@ -54,10 +54,10 @@ namespace Zoo.Management.WinformApp
 
 			var isValidAge = int.TryParse(txtAge.Text, out int age);
 
-			if (!isValidAge || age < 0)
+			if(age < 0)
 			{
+				MessageBox.Show("Animal age must greater than 0");
 				btnCreate.Enabled = true;
-				MessageBox.Show("Invalid Age");
 				return;
 			}
 
@@ -92,6 +92,7 @@ namespace Zoo.Management.WinformApp
 			{
 				var errorsMessage = result.ToString("\n");
 				MessageBox.Show(errorsMessage);
+				btnCreate.Enabled = true;
 				return;
 			}
 
@@ -111,7 +112,7 @@ namespace Zoo.Management.WinformApp
 
 			var isValidAge = int.TryParse(txtAge.Text, out int age);
 
-			if (!isValidAge || age < 0)
+			if (age < 0)
 			{
 				btnUpdate.Enabled = true;
 				MessageBox.Show("Invalid Age");
@@ -143,13 +144,14 @@ namespace Zoo.Management.WinformApp
 			{
 				var errorsMessage = result.ToString("\n");
 				MessageBox.Show(errorsMessage);
+				btnUpdate.Enabled = true;
 				return;
 			}
 
 			await _animalRepository.UpdateAsync(animal);
 
 			this.ShowListOfAnimal();
-			btnUpdate.Enabled = true;
+			btnUpdate.Enabled = false;
 			this.ClearTextBox();
 		}
 
@@ -360,7 +362,7 @@ namespace Zoo.Management.WinformApp
 			txtSpecies.Text = "";
 			txtAge.Text = "";
 			txtID.Text = "";
-			cbCage.SelectedItem = "";
+			cbCage.Text = "";
 		}
 
 
