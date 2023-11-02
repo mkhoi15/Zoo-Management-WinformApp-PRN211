@@ -11,6 +11,7 @@ using Entities.Helper;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Zoo.Management.WinformApp
@@ -27,6 +28,7 @@ namespace Zoo.Management.WinformApp
 
 			GetDataForDataGridView();
 
+            txtId.ReadOnly = true;
 
 		}
 
