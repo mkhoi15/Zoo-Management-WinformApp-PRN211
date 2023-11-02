@@ -189,7 +189,7 @@ namespace Zoo.Management.WinformApp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                btnDelete.Enabled = true; 
+                btnDelete.Enabled = true;
             }
         }
 
@@ -240,6 +240,55 @@ namespace Zoo.Management.WinformApp
                 return false;
             }
             return true;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            btnClear.Enabled = false;
+
+            ClearText();
+
+            btnClear.Enabled = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+        }
+
+        private void btnCurrentCages_Click(object sender, EventArgs e)
+        {
+            ClearText();
+
+            btnCreate.Enabled = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+
+            GetDataForDataGridView();
+        }
+
+        private void btnDeletedCages_Click(object sender, EventArgs e)
+        {
+            ClearText();
+
+            btnRecover.Enabled = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnCreate.Enabled = false;
+            btnClear.Enabled = false;
+
+            var cageList = _cageRepository.GetAll().Where(c => c.IsDeleted).Include(c => c.Area).ToList();
+            if (cageList.Count > 0 && cageList is not null)
+            {
+                dgvListCage.DataSource = cageList.Select(c => new
+                {
+                    id = c.Id,
+                    Name = c.CageName,
+                    Area = c.Area?.Name,
+                }).ToList();
+            }
+        }
+
+        private void btnRecover_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
