@@ -75,7 +75,6 @@ namespace Zoo.Management.WinformApp
 				AnimalName = animalName,
 				Species = animalSpecies,
 				Age = age,
-
 				CageId = cage.Id
 			};
 
