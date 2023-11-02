@@ -4,6 +4,7 @@ using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Entities.Helper;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Zoo.Management.WinformApp
 {
@@ -126,6 +127,12 @@ namespace Zoo.Management.WinformApp
 		private async void btnCreate_Click(object sender, EventArgs e)
 		{
 			var userName = txtUserName.Text;
+			var hadUser = _resipotory.GetAll().Where(e => e.UserName == userName).FirstOrDefault();
+			if (hadUser != null) 
+			{
+                MessageBox.Show("UserName is already exist!!");
+                return;
+            }
 			var password = txtPassword.Text;
 			var fullName = txtFullName.Text;
 			var email = txtEmail.Text;
@@ -177,11 +184,17 @@ namespace Zoo.Management.WinformApp
 			}
 			var isValidPhoneNumber = Regex.IsMatch(txtPhoneNumber.Text, @"^\d+$");
 			if (!isValidPhoneNumber)
-			{
-				MessageBox.Show("Phone number is not valid!!");
-				return;
+            {
+                MessageBox.Show("Phone number is not valid!!");
+                return;
 			}
-			user.UserName = txtUserName.Text;
+            var hadUser = _resipotory.GetAll().Where(e => e.UserName == txtUserName.Text).FirstOrDefault();
+            if (hadUser != null)
+            {
+                MessageBox.Show("UserName is already exist!!");
+                return;
+            }
+            user.UserName = txtUserName.Text;
 			user.Password = txtPassword.Text;
 			user.Dob = dtpDateOfBirth.Value;
 			user.PhoneNumber = txtPhoneNumber.Text;

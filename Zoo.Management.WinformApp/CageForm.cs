@@ -67,6 +67,12 @@ namespace Zoo.Management.WinformApp
             try
             {
                 var cageName = txtName.Text;
+                var hadCage = _cageRepository.GetAll().Where(e => e.CageName.Equals(cageName)).FirstOrDefault();
+                if (hadCage != null)
+                {
+                    MessageBox.Show("Cage already exist!", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 var area = cbArea.SelectedItem as Area;
 
                 if (area is null)
@@ -122,6 +128,13 @@ namespace Zoo.Management.WinformApp
                     return;
                 };
 
+                var hadCage = _cageRepository.GetAll().Where(e => e.CageName.Equals(txtName.Text)).FirstOrDefault();
+                if (hadCage != null)
+                {
+                    MessageBox.Show("Duplicate name!", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnUpdate.Enabled = true;
+                    return;
+                }
                 cage.CageName = txtName.Text;
                 cage.AreaId = area.Id;
 
@@ -250,6 +263,7 @@ namespace Zoo.Management.WinformApp
             setReadOnlyForAll();
 
             var cageList = _cageRepository.GetAll().Where(c => c.IsDeleted).Include(c => c.Area).ToList();
+            if (cageList.Count == 0 || cageList is null) dgvListCage.DataSource = null;
             if (cageList.Count > 0 && cageList is not null)
             {
                 dgvListCage.DataSource = cageList.Select(c => new
