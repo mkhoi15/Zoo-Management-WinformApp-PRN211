@@ -158,8 +158,14 @@ namespace Zoo.Management.WinformApp
 
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
-            var user = GetCurrentUser();
-            await _resipotory.UpdateAsync(user);
+            //var user = GetCurrentUser();
+            var id = int.Parse(txtId.Text);
+            var userUpdate = await _resipotory.GetByIdAsync(id);
+            if (userUpdate is null)
+            {
+                MessageBox.Show("User is not found. Can not update!");
+            }
+            await _resipotory.UpdateAsync(userUpdate);
             EmptyBoxes();
             MessageBox.Show("Updated");
             btnCreate.Enabled = true;
