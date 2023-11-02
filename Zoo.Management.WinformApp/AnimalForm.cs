@@ -39,6 +39,7 @@ namespace Zoo.Management.WinformApp
 
 			btnUpdate.Enabled = false;
 			btnDelete.Enabled = false;
+			btnCurrentAnimal.Enabled = false;
 
 		}
 
@@ -194,6 +195,7 @@ namespace Zoo.Management.WinformApp
 			btnCreate.Enabled = false;
 			btnUpdate.Enabled = true;
 			btnDelete.Enabled = true;
+			btnRecovery.Enabled = true;
 
 			var data = dgvAnimal.Rows[e.RowIndex].Cells;
 
@@ -212,10 +214,15 @@ namespace Zoo.Management.WinformApp
 
 		private void btnCurrentAnimal_Click(object sender, EventArgs e)
 		{
+			ClearTextBox();
 			btnDeletedAnimal.Enabled = true;
 			btnCurrentAnimal.Enabled = false;
 
-			btnCreate.Enabled = true;
+			btnCreate.Enabled = false;
+
+			btnCreate.Visible = true;
+			btnUpdate.Visible = true;
+			btnDelete.Visible = true;
 
 			btnRecovery.Enabled = false;
 			btnRecovery.Visible = false;
@@ -224,14 +231,15 @@ namespace Zoo.Management.WinformApp
 
 		private void btnDeletedAnimal_Click(object sender, EventArgs e)
 		{
+			ClearTextBox();
 			btnCurrentAnimal.Enabled = true;
 			btnDeletedAnimal.Enabled = false;
 
-			btnDelete.Enabled = false;
-			btnCreate.Enabled = false;
-			btnUpdate.Enabled = false;
+			btnCreate.Visible = false;
+			btnUpdate.Visible = false;
+			btnDelete.Visible = false;
 
-			btnRecovery.Enabled = true;
+			btnRecovery.Enabled = false;
 			btnRecovery.Visible = true;
 			ShowListOfDeleteAnimal();
 		}
