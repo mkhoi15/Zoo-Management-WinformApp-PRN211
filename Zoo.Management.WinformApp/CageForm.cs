@@ -27,38 +27,39 @@ namespace Zoo.Management.WinformApp
 
             GetDataForDataGridView();
 
-            var areaList = _areaRepository.GetAll().Where(a => !a.IsDeleted).ToList();
-            if (areaList is not null && areaList.Count > 0)
-            {
-                cbArea.DataSource = areaList;
-                cbArea.DisplayMember = "Name";
-                cbArea.ValueMember = "Id";
-            }
+            instantiateDataForCbBox();
         }
 
         private void dgvListCage_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (btnDeletedCages.Enabled)
+            try
             {
-                btnUpdate.Enabled = true;
-                btnDelete.Enabled = true;
-                btnClear.Enabled = true;
-                btnCreate.Enabled = false;
-                btnRecover.Enabled = false;
-            }
-            else
-            {
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
-                btnClear.Enabled = false;
-                btnCreate.Enabled = false;
-                btnRecover.Enabled = true;
-            }
+                if (btnDeletedCages.Enabled)
+                {
+                    btnUpdate.Enabled = true;
+                    btnDelete.Enabled = true;
+                    btnClear.Enabled = true;
+                    btnCreate.Enabled = false;
+                    btnRecover.Enabled = false;
+                }
+                else
+                {
+                    btnUpdate.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnClear.Enabled = false;
+                    btnCreate.Enabled = false;
+                    btnRecover.Enabled = true;
+                }
 
-            var row = dgvListCage.Rows[e.RowIndex];
-            txtId.Text = row.Cells[0].Value.ToString();
-            txtName.Text = row.Cells[1].Value.ToString();
-            cbArea.Text = row.Cells[2].Value.ToString();
+                var row = dgvListCage.Rows[e.RowIndex];
+                txtId.Text = row.Cells[0].Value.ToString();
+                txtName.Text = row.Cells[1].Value.ToString();
+                cbArea.Text = row.Cells[2].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void btnCreate_Click(object sender, EventArgs e)
@@ -226,6 +227,7 @@ namespace Zoo.Management.WinformApp
             ClearText();
 
             btnClear.Enabled = true;
+            btnCreate.Enabled = true;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
         }
@@ -262,16 +264,28 @@ namespace Zoo.Management.WinformApp
 
             setReadOnlyForAll();
 
-            var cageList = _cageRepository.GetAll().Where(c => c.IsDeleted).Include(c => c.Area).ToList();
-            if (cageList.Count == 0 || cageList is null) dgvListCage.DataSource = null;
-            if (cageList.Count > 0 && cageList is not null)
+            try
             {
-                dgvListCage.DataSource = cageList.Select(c => new
+
+                var cageList = _cageRepository.GetAll().Where(c => c.IsDeleted).Include(c => c.Area).ToList();
+                if (cageList.Count == 0 || cageList is null)
                 {
-                    id = c.Id,
-                    Name = c.CageName,
-                    Area = c.Area?.Name,
-                }).ToList();
+                    dgvListCage.DataSource = null;
+                    return;
+                }
+                if (cageList.Count > 0 && cageList is not null)
+                {
+                    dgvListCage.DataSource = cageList.Select(c => new
+                    {
+                        id = c.Id,
+                        Name = c.CageName,
+                        Area = c.Area?.Name,
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -335,15 +349,22 @@ namespace Zoo.Management.WinformApp
 
         private void GetDataForDataGridView()
         {
-            var cageList = _cageRepository.GetAll().Where(c => !c.IsDeleted).Include(c => c.Area).ToList();
-            if (cageList.Count > 0 && cageList is not null)
+            try
             {
-                dgvListCage.DataSource = cageList.Select(c => new
+                var cageList = _cageRepository.GetAll().Where(c => !c.IsDeleted).Include(c => c.Area).ToList();
+                if (cageList.Count > 0 && cageList is not null)
                 {
-                    id = c.Id,
-                    Name = c.CageName,
-                    Area = c.Area?.Name,
-                }).ToList();
+                    dgvListCage.DataSource = cageList.Select(c => new
+                    {
+                        id = c.Id,
+                        Name = c.CageName,
+                        Area = c.Area?.Name,
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -387,6 +408,24 @@ namespace Zoo.Management.WinformApp
         {
             txtName.ReadOnly = false;
             cbArea.Enabled = true;
+        }
+
+        private void instantiateDataForCbBox()
+        {
+            try
+            {
+                var areaList = _areaRepository.GetAll().Where(a => !a.IsDeleted).ToList();
+                if (areaList is not null && areaList.Count > 0)
+                {
+                    cbArea.DataSource = areaList;
+                    cbArea.DisplayMember = "Name";
+                    cbArea.ValueMember = "Id";
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
