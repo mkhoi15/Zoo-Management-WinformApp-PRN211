@@ -128,7 +128,7 @@ namespace Zoo.Management.WinformApp
                     return;
                 };
 
-                var hadCage = _cageRepository.GetAll().Where(e => e.CageName.Equals(txtName.Text)).FirstOrDefault();
+                var hadCage = _cageRepository.GetAll().Where(e => e.CageName.Equals(txtName.Text) && e.Id != cage.Id).FirstOrDefault();
                 if (hadCage != null)
                 {
                     MessageBox.Show("Duplicate name!", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -330,6 +330,7 @@ namespace Zoo.Management.WinformApp
         {
             txtId.Text = "";
             txtName.Text = "";
+            btnCreate.Enabled = true;
         }
 
         private void GetDataForDataGridView()

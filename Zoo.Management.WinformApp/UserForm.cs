@@ -143,9 +143,27 @@ namespace Zoo.Management.WinformApp
 				MessageBox.Show("Phone number is not valid!!");
 				return;
 			}
+			var gender = "";
 
-			var gender = cbGender.Text;
-			var role = cbRole.Text;
+            if (cbGender.Text == "Male" || cbGender.Text == "Female" || cbGender.Text == "Other")
+			{
+				gender = cbGender.Text;
+            } 
+			else
+			{
+                MessageBox.Show("Invalid Gender, Please select given value!!");
+                return;
+            }
+			var role = "";
+            if (cbRole.Text == "Admin" || cbRole.Text == "Staff" || cbRole.Text == "ZooTrainer")
+            {
+				role = cbRole.Text;
+            }
+			else
+			{
+                MessageBox.Show("Invalid Role, Please select given value!!");
+                return;
+            }
 			var dob = dtpDateOfBirth.Value;
 
 			var newUser = new ApplicationUser()
@@ -177,6 +195,7 @@ namespace Zoo.Management.WinformApp
 		private async void btnUpdate_Click(object sender, EventArgs e)
 		{
 			var user = await _resipotory.GetByIdAsync(int.Parse(txtId.Text));
+
 			if (user is null)
 			{
 				MessageBox.Show("The user is not exist!!");
@@ -188,7 +207,7 @@ namespace Zoo.Management.WinformApp
                 MessageBox.Show("Phone number is not valid!!");
                 return;
 			}
-            var hadUser = _resipotory.GetAll().Where(e => e.UserName == txtUserName.Text).FirstOrDefault();
+            var hadUser = _resipotory.GetAll().Where(e => e.UserName == txtUserName.Text && e.Id != user.Id).FirstOrDefault();
             if (hadUser != null)
             {
                 MessageBox.Show("UserName is already exist!!");
@@ -262,7 +281,6 @@ namespace Zoo.Management.WinformApp
 		{
 			if (btnRecovery.Visible != true)
 			{
-
 				btnUpdate.Enabled = true;
 				btnDelete.Enabled = true;
 				btnCreate.Enabled = false;
