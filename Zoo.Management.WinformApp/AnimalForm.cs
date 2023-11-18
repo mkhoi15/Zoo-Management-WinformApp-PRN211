@@ -18,15 +18,13 @@ namespace Zoo.Management.WinformApp
 {
     public partial class AnimalForm : Form
     {
-        private readonly AnimalRepository _animalRepository;
-        private readonly CageRepository _cageRepository;
+       
         private readonly AnimalService _animalService;
         private readonly CageService _cageService;
         private List<Animal> _animals = new List<Animal>();
         public AnimalForm()
         {
-            _animalRepository = new AnimalRepository();
-            _cageRepository = new CageRepository();
+            
             _animalService = new AnimalService();
             _cageService = new CageService();
             InitializeComponent();
