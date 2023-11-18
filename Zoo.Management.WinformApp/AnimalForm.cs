@@ -21,17 +21,19 @@ namespace Zoo.Management.WinformApp
         private readonly AnimalRepository _animalRepository;
         private readonly CageRepository _cageRepository;
         private readonly AnimalService _animalService;
+        private readonly CageService _cageService;
         private List<Animal> _animals = new List<Animal>();
         public AnimalForm()
         {
             _animalRepository = new AnimalRepository();
             _cageRepository = new CageRepository();
             _animalService = new AnimalService();
+            _cageService = new CageService();
             InitializeComponent();
 
             ShowListOfAnimal();
 
-            var cage = _cageRepository.GetAll();
+            var cage = _cageService.GetAll();
             var listCage = new List<Cage>();
 
             listCage = cage.ToList();
@@ -53,7 +55,7 @@ namespace Zoo.Management.WinformApp
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
             var animalName = txtAnimalName.Text;
-            var hadAnimal = _animalRepository.GetAll().Where(e => e.AnimalName.Equals(animalName)).FirstOrDefault();
+            var hadAnimal = _animalService.GetAll().Where(e => e.AnimalName.Equals(animalName)).FirstOrDefault();
             if (hadAnimal != null)
             {
                 MessageBox.Show("Animal existed!");
@@ -98,7 +100,7 @@ namespace Zoo.Management.WinformApp
                 return;
             }
 
-            await _animalRepository.AddAsync(animal);
+            await _animalService.Add(animal);
 
             this.ShowListOfAnimal();
             btnCreate.Enabled = true;
@@ -111,7 +113,7 @@ namespace Zoo.Management.WinformApp
             var id = int.Parse(txtID.Text);
             var animalName = txtAnimalName.Text;
             var animalSpecies = txtSpecies.Text;
-            var hadAnimal = _animalRepository.GetAll().Where(e => e.AnimalName.Equals(animalName) && e.Id != id).FirstOrDefault();
+            var hadAnimal = _animalService.GetAll().Where(e => e.AnimalName.Equals(animalName) && e.Id != id).FirstOrDefault();
             if (hadAnimal != null)
             {
                 MessageBox.Show("Animal name duplicate!");
@@ -120,7 +122,7 @@ namespace Zoo.Management.WinformApp
             }
 
             var isValidAge = int.TryParse(txtAge.Text, out int age);
-            var animalUpdate = await _animalRepository.GetByIdAsync(id);
+            var animalUpdate = await _animalService.GetAnimalById(id);
             if (animalUpdate is null)
             {
                 MessageBox.Show("The animal does not exist!!");
@@ -154,7 +156,7 @@ namespace Zoo.Management.WinformApp
                 return;
             }
 
-            await _animalRepository.UpdateAsync(animalUpdate);
+            await _animalService.Update(animalUpdate);
 
             MessageBox.Show("Updated");
 
@@ -179,7 +181,7 @@ namespace Zoo.Management.WinformApp
                 return;
             }
 
-            var animal = _animalRepository.GetAll().Where(a => a.Id == id).FirstOrDefault();
+            var animal = _animalService.GetAll().Where(a => a.Id == id).FirstOrDefault();
             if (animal == null)
             {
                 MessageBox.Show("Animal is not exist");
@@ -187,7 +189,7 @@ namespace Zoo.Management.WinformApp
                 return;
             }
 
-            var isDeleted = await _animalRepository.DeleteAsync(animal);
+            var isDeleted = await _animalService.Delete(id);
             if (isDeleted)
             {
                 MessageBox.Show("Deleted");
@@ -262,7 +264,7 @@ namespace Zoo.Management.WinformApp
         private async void btnRecovery_Click(object sender, EventArgs e)
         {
             var animal = GetCurrentAnimal();
-            var isRecovered = await _animalRepository.RecoveryAsync(animal);
+            var isRecovered = await _animalService.Recovery(animal.Id);
             EmptyBoxes();
             if (isRecovered)
             {
@@ -293,19 +295,11 @@ namespace Zoo.Management.WinformApp
 
             if (btnRecovery.Visible == false)
             {
-                _animals = _animalRepository.GetAll().
-                                   Where(a => a.IsDelete == false
-                                   && a.AnimalName.Contains(searchString))
-                                   .Include(p => p.Cage)
-                                   .AsNoTracking().ToList();
+                _animals = _animalService.Search(searchString, false);
             }
             if (btnRecovery.Visible == true)
             {
-                _animals = _animalRepository.GetAll().
-                                    Where(a => a.IsDelete == true
-                                    && a.AnimalName.Contains(searchString))
-                                    .Include(p => p.Cage)
-                                    .AsNoTracking().ToList();
+                _animals = _animalService.Search(searchString, true);
             }
 
             dgvAnimal.DataSource = _animals.Select(a => new
@@ -341,9 +335,8 @@ namespace Zoo.Management.WinformApp
 
         private void ShowListOfAnimal()
         {
-            var listAnimal = _animalRepository.GetAll().AsNoTracking()
+            var listAnimal = _animalService.GetAll()
                                 .Where(a => a.IsDelete == false)
-                                .Include(p => p.Cage)
                                 .ToList();
 
             dgvAnimal.DataSource = listAnimal.Select(a => new
@@ -358,9 +351,8 @@ namespace Zoo.Management.WinformApp
 
         private void ShowListOfDeleteAnimal()
         {
-            var listAnimal = _animalRepository.GetAll().AsNoTracking()
+            var listAnimal = _animalService.GetAll()
                                 .Where(a => a.IsDelete == true)
-                                .Include(p => p.Cage)
                                 .ToList();
 
 

@@ -94,7 +94,34 @@ namespace Services
 			}
 
         }
+
+        public async Task<Animal?> GetAnimalById(int id)
+        {
+            var animal = await _animalRepository.GetByIdAsync(id);
+
+            if(animal is null)
+            {
+                return null;
+            }
+
+            return animal;
+        }
             
+        public async Task<bool> Recovery(int id)
+        {
+            var animal = _animalRepository.GetAll()
+                         .FirstOrDefault(a => a.Id == id);
+
+            if (animal is null)
+            {
+                return false;
+            }
+
+            await _animalRepository.RecoveryAsync(animal);
+
+            return true;
+
+        }
 
     }
 }
