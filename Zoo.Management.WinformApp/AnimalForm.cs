@@ -3,6 +3,7 @@ using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.ApplicationServices;
 using Repositories;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,11 +20,13 @@ namespace Zoo.Management.WinformApp
     {
         private readonly AnimalRepository _animalRepository;
         private readonly CageRepository _cageRepository;
+        private readonly AnimalService _animalService;
         private List<Animal> _animals = new List<Animal>();
         public AnimalForm()
         {
             _animalRepository = new AnimalRepository();
             _cageRepository = new CageRepository();
+            _animalService = new AnimalService();
             InitializeComponent();
 
             ShowListOfAnimal();
@@ -184,7 +187,7 @@ namespace Zoo.Management.WinformApp
                 return;
             }
 
-            var isDeleted = await _animalRepository.DeleteUserAsync(animal);
+            var isDeleted = await _animalRepository.DeleteAsync(animal);
             if (isDeleted)
             {
                 MessageBox.Show("Deleted");
@@ -259,7 +262,7 @@ namespace Zoo.Management.WinformApp
         private async void btnRecovery_Click(object sender, EventArgs e)
         {
             var animal = GetCurrentAnimal();
-            var isRecovered = await _animalRepository.RecoveryUserAsync(animal);
+            var isRecovered = await _animalRepository.RecoveryAsync(animal);
             EmptyBoxes();
             if (isRecovered)
             {

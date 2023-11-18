@@ -4,7 +4,7 @@ namespace Repositories
 {
     public class AnimalRepository : RepositoryBase<Animal>
     {
-		public async Task<bool> DeleteUserAsync(Animal animal)
+		public async Task<bool> DeleteAsync(Animal animal)
 		{
 			var animalDelete = await this.GetByIdAsync(animal.Id);
 			if (animalDelete == null)
@@ -17,7 +17,7 @@ namespace Repositories
 			return true;
 		}
 
-		public async Task<bool> RecoveryUserAsync(Animal animal)
+		public async Task<bool> RecoveryAsync(Animal animal)
 		{
 			var animalRecover = await this.GetByIdAsync(animal.Id);
 			if (animalRecover == null)
